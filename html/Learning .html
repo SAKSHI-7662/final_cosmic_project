@@ -886,6 +886,9 @@
                     <span style="margin-left: 1rem; color: #aaa;">Section ${currentChapterIndex + 1} of ${totalChapters}</span>
                 </div>
                 ${chapter.content}
+                <div style="text-align: center; margin: 1rem 0;">
+                    <button id="downloadChapterBtn" class="btn btn-primary">📥 Download Chapter</button>
+                </div>
                 <div class="nav-buttons">
                     <button ${currentChapterIndex === 0 ? 'disabled' : ''} id="prevChapterBtn">◀ Previous Section</button>
                     <button id="nextChapterBtn" class="${currentChapterIndex === totalChapters - 1 ? 'quiz-start-btn' : ''}">${currentChapterIndex === totalChapters - 1 ? '🎯 Start Quiz' : 'Next Section ▶'}</button>
@@ -912,6 +915,8 @@
                     renderQuizMode();
                 }
             });
+
+            document.getElementById("downloadChapterBtn")?.addEventListener("click", downloadChapter);
         }
 
         function renderQuizMode() {
@@ -1053,6 +1058,26 @@
         function logout() {
             localStorage.removeItem('currentUser');
             window.location.href = 'index.html';
+        }
+
+        // Download chapter content
+        function downloadChapter() {
+            const topic = topicsData[currentTopic];
+            const chapter = topic.chapters[currentChapterIndex];
+            const title = chapter.title;
+            const content = chapter.content.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim(); // Strip HTML tags and clean whitespace
+            
+            const text = `${title}\n\n${content}`;
+            
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${title.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
 
         // Generate animated background
