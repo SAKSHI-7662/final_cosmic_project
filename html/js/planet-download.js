@@ -22,6 +22,27 @@ function downloadPlanetInfo() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+
+    // Track download activity
+    trackDownload('Planet Info', planetName);
+}
+
+// Function to track downloads
+function trackDownload(type, item) {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!currentUser) return;
+
+    const downloadData = {
+        userName: currentUser.name,
+        userEmail: currentUser.email,
+        type: type,
+        item: item,
+        timestamp: new Date().toISOString()
+    };
+
+    const downloads = JSON.parse(localStorage.getItem('downloads')) || [];
+    downloads.push(downloadData);
+    localStorage.setItem('downloads', JSON.stringify(downloads));
 }
 
 // Add event listener to download button

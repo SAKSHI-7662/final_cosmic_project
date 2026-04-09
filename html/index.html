@@ -55,6 +55,7 @@
                     <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="galaxyType.html">Galaxy</a></li>
                     <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" id="adminLink" onclick="checkAdminAccess(event)">Admin</a></li>
                 </ul>
                 <a href="loginsignup.html" class="btn btn-primary ms-lg-3">Login</a>
             </div>
@@ -166,28 +167,28 @@ Solar System Exploration</h3>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <i class="fas fa-calendar-check"></i>
+                            <i class="fas fa-planet-ringed"></i>
                         </div>
-                        <h3 class="counter" data-target="850">0</h3>
-                        <p>Events Completed</p>
+                        <h3 class="counter" data-target="8">0</h3>
+                        <p>Planets in the Solar System</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <i class="fas fa-smile"></i>
+                            <i class="fas fa-star"></i>
                         </div>
                         <h3 class="counter" data-target="1200">0</h3>
-                       
+                        <p>Stellar Facts Discovered</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <i class="fas fa-award"></i>
+                            <i class="fas fa-meteor"></i>
                         </div>
-                        <h3 class="counter"data-target="12">0</h3>
-                        <p>Years of Excellence</p>
+                        <h3 class="counter" data-target="12">0</h3>
+                        <p>Cosmic Missions Launched</p>
                     </div>
                 </div>
             </div>
@@ -208,8 +209,8 @@ Solar System Exploration</h3>
             <div class="solar-system">
                 <div class="orbit mercury"></div><div class="orbit venus"></div><div class="orbit earth"></div><div class="orbit mars"></div>
                 <div class="orbit jupiter"></div><div class="orbit saturn"></div><div class="orbit uranus"></div><div class="orbit neptune"></div>
-                <div class="sun"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjYFV-bwRLTx5vbXeIRyRZDH86KNG-4ktGcg&s" alt=""></div>
-                
+                <div class="sun"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjYFV-bwRLTx5vbXeIRyRZDH86KNG-4ktGcg&s" alt="The Sun"></div>
+
                 <div class="planet-container mercury-container"><a href="public/mercury.html" target="_blank" class="planet"><img src="https://cdn.mos.cms.futurecdn.net/v2/t:0,l:224,cw:576,ch:576,q:80,w:576/fjbeeRiPRQjQNhizwy7cWX.jpg" alt="Mercury"><span class="planet-label">Mercury</span></a></div>
                 <div class="planet-container venus-container"><a href="public/venus.html" target="_blank" class="planet"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW7obkaYKM_Y6qkXyWH818Lqsx_z7XLmjqWA&s" alt="Venus"><span class="planet-label">Venus</span></a></div>
                 <div class="planet-container earth-container"><a href="public/earth.html" target="_blank" class="planet"><img src="https://cdn.pixabay.com/photo/2016/04/02/21/01/earth-1303628_960_720.png" alt="Earth"><span class="planet-label">Earth</span></a></div>
@@ -220,11 +221,6 @@ Solar System Exploration</h3>
                 <div class="planet-container neptune-container"><a href="public/neptune.html" target="_blank" class="planet"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRhTZLAttLzaM2nxi36MjChP_R7dw7Sv-jew&s" alt="Neptune"><span class="planet-label">Neptune</span></a></div>
             </div>
         </div>
-     
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section py-5">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-8">
@@ -317,10 +313,17 @@ Solar System Exploration</h3>
         async function updateAuthUI() {
             const heroButtons = document.getElementById('heroAuthButtons');
             const navbarAuth = document.getElementById('navbarAuth');
+            const adminLink = document.getElementById('adminLink');
 
             const user = await fetchCurrentUser();
 
             if (user) {
+                // Check if user is admin
+                const isAdmin = user.isAdmin || user.email.includes('admin') || user.email === 'developer@cosmicexplorer.com';
+                
+                // Admin link is always visible but access is controlled
+                // No need to hide/show here since we use onclick check
+
                 // Update hero buttons
                 if (heroButtons) {
                     heroButtons.innerHTML = `
@@ -346,11 +349,23 @@ Solar System Exploration</h3>
                     navbarAuth.innerHTML = '';
                 }
             } else {
-                // If not logged in, hide navbar auth
+                // If not logged in, navbar auth remains
                 if (navbarAuth) {
                     navbarAuth.innerHTML = '';
                 }
                 // Hero buttons remain as is (SignUP and login)
+            }
+        }
+
+        // Admin access check function
+        function checkAdminAccess(event) {
+            event.preventDefault();
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (user && (user.isAdmin || user.email.includes('admin') || user.email === 'developer@cosmicexplorer.com')) {
+                window.location.href = 'admin.html';
+            } else {
+                alert('Access Denied: Admin privileges required!');
             }
         }
 

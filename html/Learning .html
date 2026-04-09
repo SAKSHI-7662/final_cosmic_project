@@ -792,23 +792,29 @@
         let quizResultSubmitted = false;
 
         async function submitQuizResult(topic, score, total, completedSections) {
-            try {
-                await fetch('/api/quiz-result', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        topic,
-                        score,
-                        total,
-                        completedSections
-                    })
-                });
-                console.log('Quiz result saved');
-            } catch (error) {
-                console.warn('Unable to save quiz result:', error);
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (!currentUser) {
+                console.warn('No user logged in');
+                return;
             }
+
+            const quizData = {
+                userName: currentUser.name,
+                userEmail: currentUser.email,
+                topic,
+                score,
+                total,
+                percentage: (score / total) * 100,
+                completedSections,
+                timestamp: new Date().toISOString()
+            };
+
+            // Save to localStorage
+            const quizHistory = JSON.parse(localStorage.getItem('quizHistory')) || [];
+            quizHistory.push(quizData);
+            localStorage.setItem('quizHistory', JSON.stringify(quizHistory));
+
+            console.log('Quiz result saved to database');
         }
 
         // DOM Elements
@@ -842,6 +848,7 @@
             currentQuizIndex = 0;
             quizAnswers = [];
             quizStarted = false;
+            quizResultSubmitted = false;
             renderTopics();
             updateLearningPanel();
         }
@@ -971,6 +978,7 @@
                 
                 document.getElementById("retakeQuizBtn")?.addEventListener("click", () => {
                     quizStarted = false;
+                    quizResultSubmitted = false;
                     currentQuizIndex = 0;
                     quizAnswers = [];
                     renderQuizMode();
@@ -1056,6 +1064,21 @@
         });
 
         function logout() {
+            // Track logout activity
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (currentUser) {
+                const logoutData = {
+                    userName: currentUser.name,
+                    userEmail: currentUser.email,
+                    action: 'logged out',
+                    timestamp: new Date().toISOString()
+                };
+
+                const sessions = JSON.parse(localStorage.getItem('sessions')) || [];
+                sessions.push(logoutData);
+                localStorage.setItem('sessions', JSON.stringify(sessions));
+            }
+
             localStorage.removeItem('currentUser');
             window.location.href = 'index.html';
         }
@@ -1078,6 +1101,22 @@
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
+
+            // Track download activity
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (currentUser) {
+                const downloadData = {
+                    userName: currentUser.name,
+                    userEmail: currentUser.email,
+                    type: 'Chapter',
+                    item: title,
+                    timestamp: new Date().toISOString()
+                };
+
+                const downloads = JSON.parse(localStorage.getItem('downloads')) || [];
+                downloads.push(downloadData);
+                localStorage.setItem('downloads', JSON.stringify(downloads));
+            }
         }
 
         // Generate animated background

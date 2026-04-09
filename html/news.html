@@ -52,6 +52,7 @@
                 <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="galaxyType.html">Galaxy</a></li>
                 <li class="nav-item"><a class="nav-link active" href="news.html">News</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" id="adminLink" onclick="checkAdminAccess(event)">Admin</a></li>
             </ul>
             <a href="loginsignup.html" class="btn btn-primary ms-lg-3">Login</a>
         </div>
@@ -151,6 +152,22 @@
 
 <!-- Custom JS -->
 <script src="js/main.js"></script>
+
+<script>
+  // Admin access check
+  function checkAdminAccess(event) {
+    event.preventDefault();
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    
+    if (user && (user.isAdmin || user.email.includes('admin') || user.email === 'developer@cosmicexplorer.com')) {
+      window.location.href = 'admin.html';
+    } else {
+      alert('Access Denied: Admin privileges required!');
+    }
+  }
+
+  // No longer need to check on page load since link is always visible
+</script>
 
 </body>
 </html>
