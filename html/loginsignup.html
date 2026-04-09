@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Explorer - Sign In to Begin Your Journey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', 'Georgia', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 50%, #0d0d2b 100%);
+            color: white;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Animated Stars Background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Shooting Stars */
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: linear-gradient(45deg, #fff, transparent);
+            animation: shoot 4s linear infinite;
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(300px) translateY(300px);
+                opacity: 0;
+            }
+        }
+
+        /* Login/Signup Card */
+        .auth-card {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, rgba(25, 25, 55, 0.95), rgba(15, 15, 45, 0.98));
+            border-radius: 30px;
+            padding: 2.5rem;
+            max-width: 450px;
+            width: 90%;
+            margin: 2rem auto;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .cosmic-icon {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .auth-title {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #ffd700, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .auth-subtitle {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Tab Switcher */
+        .tab-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50px;
+            padding: 0.3rem;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 0.8rem;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            color: #ccc;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ddd;
+            font-size: 0.9rem;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.9rem 1rem 0.9rem 3rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #ffd700;
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Password Toggle */
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: #aaa;
+            transition: color 0.3s;
+        }
+
+        .password-toggle:hover {
+            color: #ffd700;
+        }
+
+        /* Checkbox */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-group input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            border: none;
+            border-radius: 50px;
+            color: #1a1a2e;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Social Login */
+        .social-login {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .social-text {
+            color: #aaa;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .social-text::before,
+        .social-text::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .social-text::before {
+            left: 0;
+        }
+
+        .social-text::after {
+            right: 0;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-icon:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: translateY(-3px);
+            border-color: #ffd700;
+        }
+
+        /* Message */
+        .message {
+            padding: 0.8rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-size: 0.85rem;
+            display: none;
+        }
+
+        .message.error {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid #f44336;
+            color: #ff8a80;
+            display: block;
+        }
+
+        .message.success {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4caf50;
+            color: #81c784;
+            display: block;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1100;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        /* Link */
+        .forgot-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .forgot-link a {
+            color: #ffd700;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .forgot-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .auth-card {
+                padding: 1.5rem;
+                margin: 1rem;
+                width: auto;
+            }
+            
+            .auth-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Stars Background -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Login/Signup Card -->
+    <div class="auth-card">
+        <div class="auth-header">
+            <div class="cosmic-icon">🌌</div>
+            <h1 class="auth-title">Cosmic Explorer</h1>
+            <p class="auth-subtitle">Sign in to continue your cosmic journey</p>
+        </div>
+
+        <!-- Tab Switcher -->
+        <div class="tab-container">
+            <button class="tab-btn active" data-tab="login">🔐 Login</button>
+            <button class="tab-btn" data-tab="signup">✨ Sign Up</button>
+        </div>
+
+        <!-- Message Display -->
+        <div class="message" id="message"></div>
+
+        <!-- Login Form -->
+        <form id="loginForm">
+            <div class="form-group">
+                <label>📧 Email Address</label>
+                <div class="input-group">
+                    <span class="input-icon">📧</span>
+                    <input type="email" id="loginEmail" placeholder="cosmic@explorer.com" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>🔒 Password</label>
+                <div class="input-group">
+                    <span class="input-icon">🔒</span>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    <span class="password-toggle" onclick="togglePassword('loginPassword')">👁️</span>
+                </div>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="rememberMe">
+                <label for="rememberMe">Remember me</label>
+            </div>
+            <button type="submit" class="submit-btn">🚀 Launch into Learning 🚀</button>
+            <div class="forgot-link">
+                <a href="#" onclick="showForgotPassword()">Forgot Password?</a>
+            </div>
+        </form>
+
+        <!-- Signup Form -->
+        <form id="signupForm" style="display: none;">
+            <div class="form-group">
+                <label>👤 Full Name</label>
+                <div class="input-group">
+                    <span class="input-icon">👤</span>
+                    <input type="text" id="signupName" placeholder="Cosmic Explorer" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>📧 Email Address</label>
+                <div class="input-group">
+                    <span class="input-icon">📧</span>
+                    <input type="email" id="signupEmail" placeholder="cosmic@explorer.com" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>🔒 Password</label>
+                <div class="input-group">
+                    <span class="input-icon">🔒</span>
+                    <input type="password" id="signupPassword" placeholder="Create a strong password" required>
+                    <span class="password-toggle" onclick="togglePassword('signupPassword')">👁️</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>✅ Confirm Password</label>
+                <div class="input-group">
+                    <span class="input-icon">✅</span>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                </div>
+            </div>
+            <button type="submit" class="submit-btn">✨ Create Cosmic Account ✨</button>
+        </form>
+
+        <!-- Social Login -->
+        <div class="social-login">
+            <div class="social-text">Or continue with</div>
+            <div class="social-icons">
+                <div class="social-icon" onclick="socialLogin('google')">🌐</div>
+                <div class="social-icon" onclick="socialLogin('github')">🐙</div>
+                <div class="social-icon" onclick="socialLogin('twitter')">🐦</div>
+                <div class="social-icon" onclick="socialLogin('microsoft')">💻</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span>🎉</span>
+        <span id="toastMessage">Welcome back, Explorer!</span>
+    </div>
+
+    <script>
+        // Generate stars background
+      // ==========================
+// ⭐ Generate Stars Background
+// ==========================
+function generateStars() {
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 200; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.width = Math.random() * 3 + 'px';
+        star.style.height = star.style.width;
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 5 + 's';
+        star.style.animationDuration = Math.random() * 3 + 2 + 's';
+        starsContainer.appendChild(star);
+    }
+}
+generateStars();
+
+// ==========================
+// ⭐ DOM Elements
+// ==========================
+const loginForm = document.getElementById('loginForm');
+const signupForm = document.getElementById('signupForm');
+const tabBtns = document.querySelectorAll('.tab-btn');
+const messageDiv = document.getElementById('message');
+const toast = document.getElementById('toast');
+const toastMessage = document.getElementById('toastMessage');
+
+// ==========================
+// ⭐ Toast
+// ==========================
+function showToast(message, isError = false) {
+    toastMessage.textContent = message;
+    toast.style.background = isError
+        ? 'linear-gradient(135deg, #f44336, #d32f2f)'
+        : 'linear-gradient(135deg, #4caf50, #45a049)';
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// ==========================
+// ⭐ Message
+// ==========================
+function showMessage(message, type = 'error') {
+    messageDiv.textContent = message;
+    messageDiv.className = `message ${type}`;
+    messageDiv.style.display = 'block';
+    setTimeout(() => {
+        messageDiv.style.display = 'none';
+    }, 3000);
+}
+
+// ==========================
+// ⭐ Password Toggle
+// ==========================
+window.togglePassword = function (id) {
+    const field = document.getElementById(id);
+    const icon = field.nextElementSibling;
+
+    if (field.type === 'password') {
+        field.type = 'text';
+        icon.textContent = '🙈';
+    } else {
+        field.type = 'password';
+        icon.textContent = '👁️';
+    }
+};
+
+// ==========================
+// ⭐ Tab Switch
+// ==========================
+tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        if (btn.dataset.tab === 'login') {
+            loginForm.style.display = 'block';
+            signupForm.style.display = 'none';
+        } else {
+            loginForm.style.display = 'none';
+            signupForm.style.display = 'block';
+        }
+
+        messageDiv.style.display = 'none';
+    });
+});
+
+// ==========================
+// ⭐ Fake Database (localStorage)
+// ==========================
+function getUsers() {
+    return JSON.parse(localStorage.getItem('users')) || [];
+}
+
+function saveUsers(users) {
+    localStorage.setItem('users', JSON.stringify(users));
+}
+
+// ==========================
+// ⭐ Signup
+// ==========================
+signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('signupName').value;
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    // Validation
+    if (name.length < 3) {
+        return showMessage('❌ Name must be at least 3 characters');
+    }
+
+    if (!email.includes('@')) {
+        return showMessage('❌ Invalid email');
+    }
+
+    if (password.length < 6) {
+        return showMessage('❌ Password must be 6+ characters');
+    }
+
+    if (password !== confirmPassword) {
+        return showMessage('❌ Passwords do not match');
+    }
+
+    let users = getUsers();
+
+    const exists = users.find(u => u.email === email);
+    if (exists) {
+        return showMessage('❌ User already exists');
+    }
+
+    const newUser = { name, email, password };
+    users.push(newUser);
+    saveUsers(users);
+
+    showToast(`✨ Welcome ${name}! Account created`);
+
+    setTimeout(() => {
+        document.querySelector('[data-tab="login"]').click();
+    }, 1000);
+});
+
+// ==========================
+// ⭐ Login
+// ==========================
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    const remember = document.getElementById('rememberMe').checked;
+
+    const users = getUsers();
+    const user = users.find(u => u.email === email && u.password === password);
+
+    if (!user) {
+        return showMessage('❌ Invalid email or password');
+    }
+
+    // Save session
+    localStorage.setItem('currentUser', JSON.stringify(user));
+
+    if (remember) {
+        localStorage.setItem('rememberedUser', email);
+    }
+
+    showToast(`🚀 Welcome back ${user.name}!`);
+
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 1000);
+});
+
+// ==========================
+// ⭐ Remember User
+// ==========================
+const remembered = localStorage.getItem('rememberedUser');
+if (remembered) {
+    document.getElementById('loginEmail').value = remembered;
+    document.getElementById('rememberMe').checked = true;
+}
+
+// ==========================
+// ⭐ Forgot Password
+// ==========================
+window.showForgotPassword = function () {
+    const email = prompt("Enter your email address to reset password:");
+    if (!email) return;
+
+    const users = getUsers();
+    const userIndex = users.findIndex(u => u.email === email);
+
+    if (userIndex === -1) {
+        showToast("❌ Email not found in our records", true);
+        return;
+    }
+
+    const newPassword = prompt("Enter your new password:");
+    if (!newPassword || newPassword.length < 6) {
+        showToast("❌ Password must be at least 6 characters", true);
+        return;
+    }
+
+    const confirmPassword = prompt("Confirm your new password:");
+    if (newPassword !== confirmPassword) {
+        showToast("❌ Passwords do not match", true);
+        return;
+    }
+
+    users[userIndex].password = newPassword;
+    saveUsers(users);
+
+    showToast("✅ Password reset successful! You can now login with your new password.");
+};
+
+// ==========================
+// ⭐ Social Login
+// ==========================
+window.socialLogin = function (provider) {
+    showToast(`${provider} login coming soon 🚀`);
+};
+
+// ==========================
+// ⭐ Auto Login Check
+// ==========================
+const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+if (currentUser) {
+    showToast(`👋 Welcome back ${currentUser.name}`);
+}
+
+
+
+
+
+
+
+
+
+function getUsers() {
+    return JSON.parse(localStorage.getItem('users')) || [];
+}
+
+function saveUsers(users) {
+    localStorage.setItem('users', JSON.stringify(users));
+}
+
+// ==========================
+// ⭐ SIGNUP
+// ==========================
+signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = signupName.value;
+    const email = signupEmail.value;
+    const password = signupPassword.value;
+
+    let users = getUsers();
+
+    if (users.find(u => u.email === email)) {
+        alert("User already exists ❌");
+        return;
+    }
+
+    users.push({ name, email, password });
+    saveUsers(users);
+
+    alert("Signup successful ✅");
+});
+
+// ==========================
+// ⭐ LOGIN
+// ==========================
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const email = loginEmail.value;
+    const password = loginPassword.value;
+
+    const users = getUsers();
+
+    const user = users.find(u => u.email === email && u.password === password);
+
+    if (!user) {
+        alert("Invalid login ❌");
+        return;
+    }
+
+    // SAVE LOGIN SESSION
+    localStorage.setItem('currentUser', JSON.stringify(user));
+
+    alert("Login successful 🚀");
+
+    // 👉 REDIRECT TO QUIZ PAGE
+   window.location.href = "Learning .html";
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Explorer</title>
+    <meta name="description" content="Explore the wonders of the universe with Cosmic Explorer. Discover planets, stars, and cosmic phenomena through interactive learning and stunning visualizations.">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="spinner"></div>
+            <p class="loading-text">COSMIC EXPLORER</p>
+        </div>
+    </div>
+
+    <!-- Sticky Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container">
+            <!-- <a class="navbar-brand" href="index.html">
+                <span class="brand-icon">✦</span>COSMIC EXPLORER
+            </a> -->
+           
+             <div class="navbar-center">
+            <div class="nasa-logo" id="nasaLogo">🚀   COSMIC
+
+            </div>
+        </div>
+      <div class="col-lg-3 col-md-6">
+    <div class="category-card">...</div>
+</div>
+          <input type="text" id="searchBox" class="form-control w-25" placeholder="Search">
+          
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="galaxyType.html">Galaxy</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
+                </ul>
+                <a href="loginsignup.html" class="btn btn-primary ms-lg-3">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-lg-8 mx-auto text-center hero-content">
+                    <h1 class="hero-title animate-fade-in">COSMIC EXPLORER<br></h1>
+                    <p class="hero-subtitle animate-fade-in-delay">Journey Beyond Limits</p>
+                    <div id="heroAuthButtons" class="hero-buttons animate-fade-in-delay-2">
+                        <a href="loginsignup.html" class="btn btn-primary btn-lg me-3">SignUP</a>
+                        <a href="loginsignup.html" class="btn btn-outline-light btn-lg">login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Event Categories -->
+    <section class="categories-section py-5">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">Our Signature Events</h2>
+                <p class="section-subtitle">Curated experiences for every celebration</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card" data-category="wedding">
+                        <div class="category-image">
+                            <img src="https://www.nasa.gov/wp-content/uploads/2023/02/15404646465-7920e6d9b7-o.jpg?resize=2000,1331" alt="Weddings">
+                            <div class="category-overlay">
+                                <i class="fa-solid fa-helmet-un"></i>
+                            </div>
+                        </div>
+                        <div class="category-content">
+                            <h3>Missions</h3>
+                            <p>NASA explores the secrets of the universe for the benefit of all.</p>
+                            <a href="https://www.nasa.gov/nasa-missions/" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card" data-category="birthday">
+                        <div class="category-image">
+                            <img src="https://www.nasa.gov/wp-content/uploads/2022/12/51476067951-e10dfb6875-o-1.jpg?resize=2000,1333" alt="Birthdays">
+                            <div class="category-overlay">
+  
+                              <i class="fa-solid fa-person"></i>
+                            </div>
+                        </div>
+                        <div class="category-content">
+                            <h3>Humans in Space</h3>
+                            <p>two decades,humans have lived on the ISS,advancing science beyond Earth.</p>
+                            <a href="https://www.nasa.gov/humans-in-space/" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card" data-category="engagement">
+                        <div class="category-image">
+                            <img src="https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001016/GSFC_20171208_Archive_e001016~large.jpg" alt="Engagements">
+                            <div class="category-overlay">
+                              <i class="fa-solid fa-earth-americas"></i>
+                            </div>
+                        </div>
+                        <div class="category-content">
+                            <h3>Earth</h3>
+                            <p>Our home. Our duty.
+Save it while we can.</p>
+                            <a href="https://science.nasa.gov/earth/" class="category-link">
+                                Explore
+                                <i class="fa-solid fa-earth-americas"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card" data-category="corporate">
+                        <div class="category-image">
+                            <img src="https://science.nasa.gov/wp-content/uploads/2023/06/solar-system-illustration-16x9-1.jpg" alt="Corporate Events">
+                            <div class="category-overlay">
+                             <i class="fa-solid fa-globe"></i>
+                            </div>
+                        </div>
+                        <div class="category-content">
+                            <h3>
+Solar System Exploration</h3>
+                            <p>Our solar system has the Sun, eight planets, dwarf planets, moons, and many asteroids and comets</p>
+                            <a href="https://science.nasa.gov/solar-system/" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="stats-section py-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h3 class="counter" data-target="850">0</h3>
+                        <p>Events Completed</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <h3 class="counter" data-target="1200">0</h3>
+                       
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h3 class="counter"data-target="12">0</h3>
+                        <p>Years of Excellence</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- SECTION 2: SOLAR SYSTEM IN MOTION -->
+    <section class="galaxy-section">
+        <video class="galaxy-bg-video" autoplay muted loop playsinline>
+            <source src="https://cdn.pixabay.com/vimeo/863980119/space-199992.mp4?width=1280&hash=56b52ea2d5d10849a25a5e4cbfd4e1959db0984d" type="video/mp4">
+        </video>
+        <div class="galaxy-overlay"></div>
+        <div class="galaxy-content">
+            <h2 class="galaxy-title">The Solar System in Motion</h2>
+            <p class="galaxy-description">Witness the majestic dance of planets around our life-giving star. Each celestial body follows its own unique path, governed by the fundamental laws of physics that shape our cosmic neighborhood.</p>
+        </div>
+        <div class="solar-system-container">
+            <div class="solar-system">
+                <div class="orbit mercury"></div><div class="orbit venus"></div><div class="orbit earth"></div><div class="orbit mars"></div>
+                <div class="orbit jupiter"></div><div class="orbit saturn"></div><div class="orbit uranus"></div><div class="orbit neptune"></div>
+                <div class="sun"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjYFV-bwRLTx5vbXeIRyRZDH86KNG-4ktGcg&s" alt=""></div>
+                
+                <div class="planet-container mercury-container"><a href="public/mercury.html" target="_blank" class="planet"><img src="https://cdn.mos.cms.futurecdn.net/v2/t:0,l:224,cw:576,ch:576,q:80,w:576/fjbeeRiPRQjQNhizwy7cWX.jpg" alt="Mercury"><span class="planet-label">Mercury</span></a></div>
+                <div class="planet-container venus-container"><a href="public/venus.html" target="_blank" class="planet"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW7obkaYKM_Y6qkXyWH818Lqsx_z7XLmjqWA&s" alt="Venus"><span class="planet-label">Venus</span></a></div>
+                <div class="planet-container earth-container"><a href="public/earth.html" target="_blank" class="planet"><img src="https://cdn.pixabay.com/photo/2016/04/02/21/01/earth-1303628_960_720.png" alt="Earth"><span class="planet-label">Earth</span></a></div>
+                <div class="planet-container mars-container"><a href="public/mars.html" target="_blank" class="planet"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo0sfBghhyvJ0mC6ONbnM7wi1o_H484LZ9PA&s" alt="Mars"><span class="planet-label">Mars</span></a></div>
+                <div class="planet-container jupiter-container"><a href="public/jupiter.html" target="_blank" class="planet"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz9ALc7MeFjUtnc03ez7UlAUsoc6jGqBzr_w&s" alt="Jupiter"><span class="planet-label">Jupiter</span></a></div>
+                <div class="planet-container saturn-container"><a href="public/saturn.html" target="_blank" class="planet saturn"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Saturn"><span class="planet-label">Saturn</span></a></div>
+                <div class="planet-container uranus-container"><a href="public/uranus.html" target="_blank" class="planet"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoZD2Es7FBgVdKKZnJM5qms5W9x8E-4rvSfw&s" alt="Uranus"><span class="planet-label">Uranus</span></a></div>
+                <div class="planet-container neptune-container"><a href="public/neptune.html" target="_blank" class="planet"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRhTZLAttLzaM2nxi36MjChP_R7dw7Sv-jew&s" alt="Neptune"><span class="planet-label">Neptune</span></a></div>
+            </div>
+        </div>
+     
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h2 class="cta-title">Ready to explore the universe and test your knowledge?</h2>
+                    <p class="cta-text">Learn fascinating cosmic facts and challenge yourself with exciting quizzes.</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <button id="startLearningBtn" class="btn btn-light btn-lg">Start Learning</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="footer-brand"><span class="brand-icon">🚀</span> Cosmic Explorer</h4>
+                    <p class="footer-text">Embark on an extraordinary journey through the cosmos with cutting-edge exploration and unparalleled discoveries.</p>
+                    <div class="social-links mt-4">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="footer-heading">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="galaxyType.html">Galaxy</a></li>
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="Learning .html">Learning</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-heading">Cosmic</h5>
+                    <ul class="footer-links">
+                        <li><a href="public/earth.html">Earth</a></li>
+                        <li><a href="public/mars.html">Mars</a></li>
+                        <li><a href="public/jupiter.html">Jupiter</a></li>
+                        <li><a href="public/saturn.html">Saturn</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <h5 class="footer-heading">Contact Info</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> hello@cosmicexplorer.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 sakshi Lane, NYC</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="copyright">&copy; 2025 Cosmic Explorer. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="footer-legal">Privacy Policy</a>
+                    <span class="mx-2">|</span>
+                    <a href="#" class="footer-legal">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    <script>
+        async function fetchCurrentUser() {
+            try {
+                const user = JSON.parse(localStorage.getItem('currentUser'));
+                return user || null;
+            } catch (error) {
+                console.error('Unable to fetch current user:', error);
+                return null;
+            }
+        }
+
+        async function updateAuthUI() {
+            const heroButtons = document.getElementById('heroAuthButtons');
+            const navbarAuth = document.getElementById('navbarAuth');
+
+            const user = await fetchCurrentUser();
+
+            if (user) {
+                // Update hero buttons
+                if (heroButtons) {
+                    heroButtons.innerHTML = `
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="welcome-message text-center">
+                                <h4 class="text-light mb-2">Welcome ${user.name}!</h4>
+                                <div class="user-info d-flex align-items-center justify-content-center gap-2 mb-3">
+                                    <i class="fas fa-user-circle fa-2x text-light"></i>
+                                    <small class="text-light">${user.email}</small>
+                                </div>
+                            </div>
+                            <button class="btn btn-danger btn-lg" id="logoutHeroBtn">Logout</button>
+                        </div>
+                    `;
+                    document.getElementById('logoutHeroBtn')?.addEventListener('click', () => {
+                        localStorage.removeItem('currentUser');
+                        window.location.reload();
+                    });
+                }
+
+                // Hide navbar auth when logged in
+                if (navbarAuth) {
+                    navbarAuth.innerHTML = '';
+                }
+            } else {
+                // If not logged in, hide navbar auth
+                if (navbarAuth) {
+                    navbarAuth.innerHTML = '';
+                }
+                // Hero buttons remain as is (SignUP and login)
+            }
+        }
+
+        function setupStartLearningButton() {
+            const startBtn = document.getElementById('startLearningBtn');
+            if (!startBtn) return;
+
+            startBtn.addEventListener('click', async () => {
+                const user = await fetchCurrentUser();
+                if (user) {
+                    window.location.href = 'Learning .html';
+                } else {
+                    alert('Please log in first to access the Learning section.');
+                    window.location.href = 'loginsignup.html';
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateAuthUI();
+            setupStartLearningButton();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Galaxy Types | NASA Science – Spiral, Elliptical, Irregular & More</title>
+  <meta name="description" content="Explore the types of galaxies classified by NASA: spiral, elliptical, lenticular, irregular, active galaxies, Seyfert, quasars, blazars, and join citizen science.">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #03050b;
+      color: #eef2ff;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* NASA-style dark cosmic background */
+    .bg-stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 30%, #0a0f1f, #020408);
+      z-index: -2;
+    }
+
+    /* container layout */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* header & navigation */
+    .nasa-header {
+      padding: 2rem 0 1rem;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.3);
+      margin-bottom: 2rem;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #ffffff, #7aa9ff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+    }
+
+    .logo span {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #9ca3cf;
+      display: block;
+    }
+
+    .random-fact-box {
+      background: rgba(15, 25, 45, 0.7);
+      backdrop-filter: blur(8px);
+      border-radius: 2rem;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.85rem;
+      border-left: 3px solid #3b82f6;
+      max-width: 320px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .random-fact-box i {
+      margin-right: 8px;
+      color: #60a5fa;
+    }
+
+    .random-fact-box:hover {
+      background: #1e2a4e;
+    }
+
+    /* sticky navigation */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      background: rgba(3, 5, 11, 0.92);
+      backdrop-filter: blur(16px);
+      z-index: 100;
+      border-bottom: 1px solid #1f2a48;
+      padding: 0.75rem 0;
+      margin-bottom: 2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.2rem;
+      justify-content: center;
+      list-style: none;
+    }
+
+    .nav-links li a {
+      color: #cdd9ff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 0.4rem 0;
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links li a:hover, .nav-links li a.active {
+      color: white;
+      border-bottom-color: #3b82f6;
+    }
+
+    /* section titles */
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin: 2.5rem 0 1.5rem 0;
+      letter-spacing: -0.01em;
+      border-left: 5px solid #3b82f6;
+      padding-left: 1.2rem;
+    }
+
+    .section-sub {
+      color: #9bb4ff;
+      margin-top: -0.8rem;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    /* galaxy card layout */
+    .galaxy-card {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      background: rgba(10, 18, 30, 0.55);
+      backdrop-filter: blur(2px);
+      border-radius: 2rem;
+      padding: 1.8rem;
+      margin-bottom: 3rem;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s;
+    }
+
+    .galaxy-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.5);
+      border-color: rgba(59, 130, 246, 0.5);
+    }
+
+    .card-img {
+      flex: 1.1;
+      min-width: 240px;
+    }
+
+    .card-img img {
+      width: 100%;
+      height: auto;
+      border-radius: 1.5rem;
+      object-fit: cover;
+      box-shadow: 0 12px 24px -8px black;
+      background: #0a0f1a;
+    }
+
+    .credit {
+      font-size: 0.7rem;
+      color: #8a99cc;
+      margin-top: 0.5rem;
+      text-align: right;
+    }
+
+    .card-text {
+      flex: 1.5;
+    }
+
+    .card-text h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #f0f4ff;
+    }
+
+    .card-text p {
+      margin-bottom: 1rem;
+      color: #d3deff;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #1e2f50;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.8rem;
+      margin-top: 0.5rem;
+      color: #b9d0ff;
+    }
+
+    /* CTA citizen science */
+    .citizen-science {
+      background: linear-gradient(135deg, #0b1120, #071122);
+      border-radius: 2rem;
+      padding: 2.5rem;
+      text-align: center;
+      margin: 3rem 0 2rem;
+      border: 1px solid #2d4270;
+    }
+
+    .citizen-science h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .btn-nasa {
+      display: inline-block;
+      background: #1e3a8a;
+      border: none;
+      padding: 0.9rem 2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 40px;
+      color: white;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      transition: 0.2s;
+      text-decoration: none;
+      background-image: linear-gradient(145deg, #2563eb, #1e40af);
+      box-shadow: 0 4px 12px rgba(0, 30, 100, 0.4);
+    }
+
+    .btn-nasa:hover {
+      transform: scale(1.02);
+      background-image: linear-gradient(145deg, #3b82f6, #1e3a8a);
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding: 2rem 0;
+      border-top: 1px solid #1f2a48;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #8092c2;
+    }
+
+    /* back to top */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #1e2f50cc;
+      backdrop-filter: blur(8px);
+      padding: 0.7rem 1rem;
+      border-radius: 2rem;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s;
+      z-index: 99;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .back-to-top i {
+      margin-right: 6px;
+    }
+
+    .back-to-top.show {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    @media (max-width: 780px) {
+      .container {
+        padding: 0 1rem;
+      }
+      .section-title {
+        font-size: 1.8rem;
+      }
+      .galaxy-card {
+        flex-direction: column;
+      }
+      .sticky-nav .nav-links {
+        gap: 0.5rem;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+      .random-fact-box {
+        margin-top: 0.5rem;
+        max-width: 100%;
+      }
+      .logo-area {
+        flex-direction: column;
+      }
+    }
+
+
+
+
+
+
+
+
+#galaxy-hero-section.galaxy-hero {
+    position: relative;
+    height: 100vh;
+    background: url("https://assets.science.nasa.gov/dynamicimage/assets/science/astro/universe/2023/09/swift_M31_mosaic_1600.webp?w=2048") no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+}
+
+/* Overlay */
+#space-overlay.galaxy-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 20, 0.6);
+}
+
+/* Content Container */
+#galaxy-content-container.galaxy-content {
+    position: relative;
+    z-index: 2;
+    padding-left: 80px;
+}
+
+/* Title */
+#galaxy-main-title.galaxy-title {
+    color: #ffffff;
+    font-size: 80px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #galaxy-main-title.galaxy-title {
+        font-size: 50px;
+    }
+
+    #galaxy-content-container.galaxy-content {
+        padding-left: 30px;
+    }
+}
+
+
+
+
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="bg-stars"></div>
+
+ <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+    <div class="container">
+
+        <div class="navbar-center">
+            <div class="nasa-logo" id="nasaLogo">🚀 COSMIC</div>
+        </div>
+
+        <!-- ✅ SEARCH BOX -->
+        <input type="text" id="searchBox" class="form-control w-25" placeholder="Search">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="galaxyType.html">Galaxy</a></li>
+                <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
+            </ul>
+            <a href="loginsignup.html" class="btn btn-primary ms-lg-3">Login</a>
+        </div>
+
+    </div>
+</nav>
+
+<div class="sticky-nav">
+  <div class="container">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#spiral" class="nav-item">Spiral</a></li>
+      <li><a href="#elliptical" class="nav-item ">Elliptical</a></li>
+      <li><a href="#lenticular" class="nav-item">Lenticular</a></li>
+      <li><a href="#irregular" class="nav-item">Irregular</a></li>
+      <li><a href="#active" class="nav-item">Active</a></li>
+      <li><a href="#seyfert" class="nav-item">Seyfert</a></li>
+      <li><a href="#quasars" class="nav-item">Quasars</a></li>
+      <li><a href="#blazars" class="nav-item">Blazars</a></li>
+
+    </ul>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+  <section id="galaxy-hero-section" class="galaxy-hero">
+        
+        <!-- Background Overlay -->
+        <div id="space-overlay" class="galaxy-overlay"></div>
+
+        <!-- Content -->
+        <div id="galaxy-content-container" class="galaxy-content">
+            <h1 id="galaxy-main-title" class="galaxy-title">
+                Galaxy Types
+            </h1>
+        </div>
+
+    </section>
+
+
+
+<main class="container">
+  <div class="intro-text" style="margin-bottom: 2rem;">
+    <p style="font-size: 1.1rem; max-width: 800px;">Scientists classify galaxies by shape, activity in their central regions, and viewing angle. From majestic spirals to giant ellipticals and brilliant quasars — explore the cosmic menagerie.</p>
+  </div>
+
+
+
+
+
+  <!-- Spiral Galaxies -->
+  <section id="spiral">
+    <div class="galaxy-card">
+      <div class="card-img">
+        <img src="https://assets.science.nasa.gov/dynamicimage/assets/science/astro/universe/internal_resources/371/Spiral_Galaxy-1.jpeg?w=1200&h=938&fit=clip&crop=faces%2Cfocalpoint" alt="Spiral galaxy M101 captured by Hubble" loading="lazy">
+   
+      </div>
+      <div class="card-text">
+        <h2><i class="fas fa-dharmachakra"></i> Spiral Galaxies</h2>
+        <p>This stunning view of spiral galaxy M101, also known as the Pinwheel galaxy, was captured by the Hubble Space Telescope.
+NASA, ESA, K. Kuntz (JHU), F. Bresolin (University of Hawaii), J. Trauger (Jet Propulsion Lab), J. Mould (NOAO), Y.-H. Chu (University of Illinois, Urbana) and STScI; CFHT Image: Canada-France-Hawaii Telescope/J.-C. Cuillandre/Coelum; NOAO Image: G. Jacoby, B. Bohannan, M. Hanna/NOAO/AURA/NSF
+Our Milky Way is one example of a broad class of galaxies defined by the presence of spiral arms. These galaxies resemble giant rotating pinwheels with a pancake-like disk of stars and a central bulge or tight concentration of stars.
+
+The spiral arms can be wound tightly or loosely, and some cannot be seen from Earth because we view the galaxy from the side, edge on.
+
+Spiral galaxies are surrounded by halos, mixtures of old stars, star clusters, and dark matter – invisible material that does not emit or reflect light but still has a gravitational pull on other matter. The youngest stars form in gas-rich arms, while older stars can be found throughout the disk and within the bulge and halo.
+
+Both the Milky Way and the Andromeda galaxies belong to a subtype known as barred spirals, which make up two-thirds of the group. Barred spirals sport ribbons of stars, gas, and dust that cut across their centers. Scientists think the presence of a bar indicates that a galaxy has reached full maturity.</p>
+        <p>Barred spirals (like the Milky Way) feature a central bar of stars and gas. About two-thirds of spirals are barred, indicating full galactic maturity.</p>
+        <div class="badge"><i class="far fa-clock"></i> Ongoing star formation</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Elliptical Galaxies (highlighted as requested) -->
+  <section id="elliptical">
+    <div class="galaxy-card" style="border-left: 4px solid #3b82f6;">
+      <div class="card-img">
+        <img src="https://assets.science.nasa.gov/dynamicimage/assets/science/astro/universe/internal_resources/372/Elliptical-1.jpeg?w=1280&h=1231&fit=clip&crop=faces%2Cfocalpoint" alt="Elliptical galaxy Messier 87, massive and smooth" loading="lazy">
+       
+      </div>
+      <div class="card-text">
+        <h2><i class="fas fa-circle"></i> Elliptical Galaxies</h2>
+        <p>NGC 2865, shown here in an image captured by the Hubble Space Telescope, is an elliptical galaxy located 100 million light-years away.
+ESA/Hubble & NASA
+Elliptical galaxies have shapes that range from completely round to oval. They are less common than spiral galaxies.
+
+Unlike spirals, elliptical galaxies usually contain little gas and dust and show very little organization or structure. The stars orbit around the core in random directions and are generally older than those in spiral galaxies since little of the gas needed to form new stars remains. Scientists think elliptical galaxies originate from collisions and mergers with spirals.</p>
+        <p>Scientists believe ellipticals often originate from spectacular collisions and mergers of spiral galaxies. They are less common than spirals but can be enormous — some contain trillions of stars.</p>
+        <div class="badge"><i class="fas fa-globe"></i> Ancient stellar populations | Little star formation</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lenticular Galaxies -->
+  <section id="lenticular">
+    <div class="galaxy-card">
+      <div class="card-img">
+        <img src="https://assets.science.nasa.gov/dynamicimage/assets/science/astro/universe/internal_resources/373/Lenticular-1.jpeg?w=1200&h=979&fit=clip&crop=faces%2Cfocalpoint" alt="Lenticular galaxy NGC 6861" loading="lazy">
+     
+      </div>
+      <div class="card-text">
+        <h2><i class="fas fa-lens"></i> Lenticular Galaxies</h2>
+     <p>Lenticular galaxy NGC 4886, imaged here by the Hubble Space Telescope, contains primarily old stars but no spiral arms.
+ESA/Hubble & NASA. Acknowledgement: Gilles Chapdelaine
+Lenticular galaxies are a kind of cross between spirals and ellipticals. They have the central bulge and disk common to spiral galaxies but no arms. But like ellipticals, lenticular galaxies have older stellar populations and little ongoing star formation.
+
+Scientists have a few theories about how lenticular galaxies evolved. One idea suggests these galaxies are older spirals whose arms have faded. Another proposes that lenticulars formed from mergers of spiral galaxies.</p>
+        <p>A hybrid between spirals and ellipticals: they have a central bulge and disk but lack prominent spiral arms. Stellar populations are older, with little ongoing star formation. They might be aging spirals whose arms faded, or products of galactic mergers.</p>
+        <div class="badge"><i class="fas fa-bridge"></i> Disk without arms</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Irregular Galaxies -->
+  <section id="irregular">
+    <div class="galaxy-card">
+      <div class="card-img">
+        <img src="https://assets.science.nasa.gov/dynamicimage/assets/science/astro/universe/internal_resources/374/Irregular-1.jpeg?w=1041&h=1073&fit=clip&crop=faces%2Cfocalpoint" alt="Irregular galaxy NGC 2366" loading="lazy">
+    
+      </div>
+      <div class="card-text">
+        <h2><i class="fas fa-shapes"></i> Irregular Galaxies</h2>
+        <p>The Hubble Space Telescope captured this image of NGC 5264, an irregular dwarf galaxy.
+ESA/Hubble & NASA
+Irregular galaxies have unusual shapes, like toothpicks, rings, or even little groupings of stars. They range from dwarf irregular galaxies with 100 million times the Sun’s mass to large ones weighing 10 billion solar masses.
+
+Astronomers think these galaxies’ odd shapes are sometimes the result of interactions with others. For example, one spiral galaxy passing another with a stronger gravitational pull could lose some of its material, become distorted, and morph into a new shape. Some, like gas-rich dwarf galaxies, may be new, formed by material pulled from such encounters. Or perhaps when galaxies collide, they create a larger, oddly shaped mashup. Some scientists theorize that some large irregular galaxies could represent an intermediate step between spiral and elliptical galaxies.
+
+Irregular galaxies born from galaxy interactions or collisions typically host a mix of older and younger stars, depending on the characteristics and composition of the original galaxies. Irregular galaxies may also hold significant amounts of gas and dust – essential ingredients for making new stars.</p>
+        <div class="badge"><i class="fas fa-cloud-moon"></i> Rich in gas & dust</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Active Galaxies (AGN) -->
+  <section id="active">
+    <div class="galaxy-card">
+      <div class="card-img">
+        <img src="https://cdn.britannica.com/32/111332-050-5D921A4E/NGC-7742-Seyfert-galaxy-Type-2-Hubble.jpg" alt="Irregular galaxy NGC 2366" loading="lazy">
+      
+      </div>
+      <div class="card-text">
+        <h2><i class="fas fa-bolt"></i> Active Galaxies</h2>
+        <p>Around 10% of known galaxies are active, which means their centers appear more than 100 times brighter than the combined light of their stars. They can be spiral, elliptical, or irregular. The Milky Way is not currently an active galaxy, although it likely experienced a burst of activity in the past few million years.
+
+Astronomers think this excess energy comes from areas near the galaxies’ central supermassive black holes, which range from hundreds of thousands to billions of times the mass of our Sun.
+
+Gas and dust collect around the black hole to form an accretion disk. The black hole’s gravity compresses and heats the disk, which causes the material to glow across multiple wavelengths, from infrared to X-rays.
+
+Infrared observations show that the black hole and its accretion disk are embedded within a clumpy ring of cooler dust, called a torus, that may be a few light-years across. Close to the black hole, a small fraction of the infalling gas can be driven outward, perpendicular to the disk, as jets of particles that move near the speed of light.
+
+During the early 20th century, astronomers began classifying active galaxies based on the distinctive characteristics and behaviors they observed. Scientists now think viewing the centers of these galaxies at different angles – for example, seeing directly into the torus versus seeing it from the side – produce many of the signature traits.
+
+Active galaxies can also be categorized by their brightness in radio wavelengths. Radio-loud galaxies typically emit from both the accretion disk and the jets. Radio-quiet galaxies tend to have little-to-no emission from jets. The observed luminosity is also thought to be another aspect of our viewing angle. Jets directed more toward our line of sight, viewed “down the barrel,” appear brighter and more variable than those viewed at wider angles.</p>
+        <p>Infrared views reveal a dusty torus around the nucleus. Active galaxies can be spiral, elliptical, or irregular, and include subclasses like Seyferts, quasars, and blazars.</p>
+        <div class="badge"><i class="fas fa-fire"></i> Central black hole powerhouse</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seyfert Galaxies -->
+  <section id="seyfert">
+    <div class="galaxy-card">
+      <div class="card-img">
+        <img src="https://assets.science.nasa.gov/dynamicimage/assets/science/astro/universe/internal_resources/375/Seyfert-1.jpeg?w=1200&h=1073&fit=clip&crop=faces%2Cfocalpoint" alt="Seyfert galaxy NGC 1068" loading="lazy">
+       
+      </div>
+      <div class="card-text">
+        <h2><i class="fas fa-eye"></i> Seyfert Galaxies</h2>
+        <p>The Hubble Space Telescope captured this image of spiral galaxy NCG 5728, which is also a Seyfert-type active galaxy.
+ESA/Hubble, A. Riess et al., J. Greene
+Seyfert galaxies, first identified in 1943 by American astronomer Carl Seyfert, are the most common active galaxies and also exhibit the lowest energies. All Seyferts look like normal galaxies in visible light, but they emit considerable infrared radiation. When observed in the infrared, some reveal bright emission from the donut-shaped torus. Some also emit X-rays. Seyfert galaxies tend to have lower radio luminosities, although some produce radio jets.
+
+Scientists divide Seyferts into two classes. Type I Seyfert galaxies display unusual features in their visible light that imply rapid motion near the accretion disk. Type II Seyferts show features that imply much slower motion. However, this distinction may result from different viewing angles into the centers of these galaxies.</p>
+        <div class="badge"><i class="fas fa-chart-line"></i> Bright nuclei, radio quiet</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quasars -->
+  <section id="quasars">
+    <div class="galaxy-card">
+      <div class="card-img">
+        <img src="https://assets.science.nasa.gov/dynamicimage/assets/science/astro/universe/internal_resources/376/Quasar-1.jpeg?w=800&h=800&fit=clip&crop=faces%2Cfocalpoint" alt="Quasar 3C 273, brilliant active core" loading="lazy">
+       
+      </div>
+      <div class="card-text">
+        <h2><i class="fas fa-sun"></i> Quasars</h2>
+        <p>This Hubble Space Telescope image reveals a bright starlike glow in the center of active galaxy Markarian 231, the nearest quasar to Earth.
+NASA, ESA, the Hubble Heritage Team (STScI/AURA)-ESA/Hubble Collaboration, and A. Evans (University of Virginia, Charlottesville/NRAO/Stony Brook University)
+Quasars are the most luminous type of active galaxy. They emit light across the electromagnetic spectrum, produce powerful particle jets, and can radiate thousands of times the energy emitted by a galaxy like the Milky Way. The nearest quasar, called Markarian 231, is located some 600 million light-years away, but we see many more quasars the farther we look.
+
+Scientists have identified over 1 million quasars, with the farthest one currently known lying about 13 billion light-years away. Since light takes time to travel, scientists can use light from these galaxies as a way to peer back in time to study black hole growth and galaxy evolution. Merging galaxies in the young universe may provide the fuel to power the enormous energy output of quasars, but when the feeding frenzy ends, the black hole cannot maintain it. It’s thought that quasar activity may be episodic and that this entire phase may last only about 10 million years.</p>
+        <div class="badge"><i class="fas fa-tachometer-alt"></i> Cosmic lighthouses</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blazars -->
+  <section id="blazars">
+    <div class="galaxy-card">
+      <div class="card-img">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLGU3wCiW5toCZrXk99TfSHjBLtChof3YiZA&s" alt="Blazar with jet pointing toward Earth" loading="lazy">
+        
+      </div>
+      <div class="card-text">
+        <h2><i class="fas fa-meteor"></i> Blazars</h2>
+        <p>Markarian 421, imaged here by the National Science Foundation’s Sloan Digital Sky Survey, is one of the closest blazars to Earth.
+Sloan Digital Sky Survey
+Blazars produce light across the electromagnetic spectrum. Their powerful jets point almost directly at Earth, so they appear brighter than other active galaxies. Observatories on Earth can sometimes detect high-energy particles – like neutrinos – produced within the jets and trace them back to their home galaxy. This information gives scientists a glimpse into the environment around the blazar’s supermassive black hole.</p>
+        <div class="badge"><i class="fas fa-bullseye"></i> Jets aimed at us</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Citizen Science: Galaxy Zoo -->
+ 
+</main>
+
+
+
+<script>
+  // ======================== RANDOM GALAXY FACTS (JavaScript interaction) ========================
+  const facts = [
+    "Elliptical galaxies contain mostly old, red stars and very little interstellar dust.",
+    "The largest galaxies in the universe are often elliptical giants like IC 1101.",
+    "Spiral galaxies like the Milky Way are actively forming new stars in their arms.",
+    "Quasars can outshine entire galaxies and are powered by supermassive black holes.",
+    "Galaxy collisions can transform spirals into ellipticals over billions of years.",
+    "Barred spirals make up about 2/3 of all spiral galaxies.",
+    "The Sombrero Galaxy (M104) is a lenticular galaxy with a prominent dust lane.",
+    "Irregular galaxies often result from tidal interactions and can be dwarf or massive.",
+    "Blazars are one of the most energetic phenomena in the cosmos.",
+    "Citizen scientists using Galaxy Zoo have discovered unusual galaxy types like green peas."
+  ];
+  
+  const factBox = document.getElementById('randomFactBox');
+  const factSpan = document.getElementById('factText');
+  
+  function updateRandomFact() {
+    const randomIndex = Math.floor(Math.random() * facts.length);
+    factSpan.textContent = facts[randomIndex];
+  }
+  // initial random fact on page load
+  updateRandomFact();
+  
+  factBox.addEventListener('click', (e) => {
+    updateRandomFact();
+    // small animation feedback
+    factBox.style.transform = "scale(0.99)";
+    setTimeout(() => factBox.style.transform = "", 150);
+  });
+  
+  // ======================== ACTIVE NAVIGATION (SCROLLSPY) ========================
+  const sections = document.querySelectorAll('section');
+  const navItems = document.querySelectorAll('.nav-item');
+  
+  function updateActiveNav() {
+    let current = "";
+    const scrollPos = window.scrollY + 150; // offset for sticky header
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+        current = section.getAttribute('id');
+      }
+    });
+    
+    navItems.forEach(item => {
+      item.classList.remove('active');
+      const href = item.getAttribute('href').substring(1);
+      if (href === current) {
+        item.classList.add('active');
+      }
+    });
+    // if no section active (top of page), set first maybe Spiral
+    if (!current && window.scrollY < 200) {
+      document.querySelector('.nav-item[href="#spiral"]').classList.add('active');
+    }
+  }
+  
+  window.addEventListener('scroll', updateActiveNav);
+  window.addEventListener('load', updateActiveNav);
+  
+  // ======================== SMOOTH SCROLL FOR NAVIGATION ========================
+  navItems.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        const offset = 70; // fixed navbar height compensation
+        const elementPosition = targetElement.offsetTop - offset;
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth'
+        });
+        // update active style immediately
+        navItems.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      }
+    });
+  });
+  
+  // ======================== BACK TO TOP BUTTON ========================
+  const backBtn = document.getElementById('backToTopBtn');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+      backBtn.classList.add('show');
+    } else {
+      backBtn.classList.remove('show');
+    }
+  });
+  
+  backBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  
+  // ======================== optional: interactive alert on galaxy zoo button (just for demo) ========================
+  const zooBtn = document.getElementById('galaxyZooBtn');
+  if (zooBtn) {
+    zooBtn.addEventListener('click', (e) => {
+      // just external link, no prevent, but we can log a friendly console message
+      console.log("✨ Join NASA's Galaxy Zoo project — real science awaits!");
+    });
+  }
+  
+  // ======================== HIGHLIGHT ELLIPTICAL ON HASH IF ANY ========================
+  if (window.location.hash === '#elliptical-galaxies' || window.location.hash === '#elliptical') {
+    setTimeout(() => {
+      const ellipticalSection = document.getElementById('elliptical');
+      if (ellipticalSection) {
+        ellipticalSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 200);
+  }
+  
+  // extra polish: handle image error fallback for blazar illustration
+  const blazarImg = document.querySelector('#blazars img');
+  if (blazarImg && blazarImg.complete && blazarImg.naturalWidth === 0) {
+    blazarImg.src = 'https://www.nasa.gov/sites/default/files/thumbnails/image/blazar_artwork.jpg';
+    blazarImg.onerror = () => { blazarImg.src = 'https://cdn.spacetelescope.org/archives/images/screen/heic1506a.jpg'; };
+  }
+</script>
+
+<!-- Footer -->
+<footer class="footer py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <h4 class="footer-brand"><span class="brand-icon">🚀</span> Cosmic Explorer</h4>
+                <p class="footer-text">Embark on an extraordinary journey through the cosmos with cutting-edge exploration and unparalleled discoveries.</p>
+                <div class="social-links mt-4">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h5 class="footer-heading">Quick Links</h5>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="galaxyType.html">Galaxy</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="Learning .html">Learning</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="footer-heading">Cosmic</h5>
+                <ul class="footer-links">
+                    <li><a href="public/earth.html">Earth</a></li>
+                    <li><a href="public/mars.html">Mars</a></li>
+                    <li><a href="public/jupiter.html">Jupiter</a></li>
+                    <li><a href="public/saturn.html">Saturn</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 mb-4">
+                <h5 class="footer-heading">Contact Info</h5>
+                <ul class="footer-contact">
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> hello@cosmicexplorer.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 sakshi Lane, NYC</li>
+                </ul>
+            </div>
+        </div>
+        <hr class="footer-divider">
+        <div class="row">
+            <div class="col-md-6 text-center text-md-start">
+                <p class="copyright">&copy; 2025 Cosmic Explorer. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <a href="#" class="footer-legal">Privacy Policy</a>
+                <span class="mx-2">|</span>
+                <a href="#" class="footer-legal">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JS -->
+<script src="js/main.js"></script>
+
+</body>
+</html>

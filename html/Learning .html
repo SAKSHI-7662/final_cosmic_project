@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Explorer - Textbook Style Learning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', 'Segoe UI', serif;
+            background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 50%, #0d0d2b 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Stars Background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Floating Planets Animation */
+        .floating-planets {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-planet {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(20, 10, 40, 0.9));
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.4);
+            backdrop-filter: blur(15px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .nav a:hover {
+            color: #ffd700;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Topics Section - Textbook Chapters */
+        .topics-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-family: 'Georgia', serif;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.5);
+            display: inline-block;
+            width: auto;
+            padding-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        .title-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .topic-card {
+            background: linear-gradient(135deg, rgba(25, 25, 55, 0.9), rgba(15, 15, 45, 0.95));
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .topic-card:hover::before {
+            left: 100%;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: linear-gradient(135deg, rgba(35, 35, 75, 0.95), rgba(25, 25, 65, 0.98));
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.1);
+            border-color: rgba(255, 215, 0, 0.4);
+        }
+        
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            background: rgba(35, 35, 75, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .topic-card.active {
+            border-left-color: #ff6b6b;
+            background: rgba(45, 45, 85, 0.95);
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .topic-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .topic-name {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            font-family: 'Georgia', serif;
+        }
+
+        .topic-desc {
+            color: #bbb;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .chapter-badge {
+            font-size: 0.8rem;
+            color: #ffd700;
+            font-family: monospace;
+        }
+
+        /* Textbook Learning Panel */
+        .learning-panel {
+            background: linear-gradient(135deg, rgba(20, 20, 45, 0.95), rgba(10, 10, 35, 0.98));
+            border-radius: 25px;
+            padding: 0;
+            margin-top: 3rem;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .learning-header {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(30, 20, 50, 0.9));
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .current-topic {
+            font-size: 1.8rem;
+            color: #ffd700;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+        }
+
+        .chapter-info {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 0.3rem;
+        }
+
+        .mode-badge {
+            background: rgba(255, 215, 0, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-family: monospace;
+        }
+
+        /* Textbook Content Area */
+        .textbook-content {
+            padding: 3rem;
+            min-height: 600px;
+            background: linear-gradient(135deg, rgba(245, 240, 220, 0.05), rgba(255, 250, 240, 0.08));
+            font-size: 1.1rem;
+            line-height: 1.8;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Typography for textbook feel */
+        .chapter-title {
+            font-size: 2.2rem;
+            font-family: 'Georgia', serif;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+            border-left: 4px solid #ffd700;
+            padding-left: 1rem;
+        }
+
+        .section-heading {
+            font-size: 1.5rem;
+            font-family: 'Georgia', serif;
+            color: #ffaa66;
+            margin: 1.5rem 0 1rem 0;
+            border-bottom: 1px solid rgba(255, 170, 102, 0.3);
+            padding-bottom: 0.3rem;
+        }
+
+        .subsection-heading {
+            font-size: 1.2rem;
+            font-family: 'Georgia', serif;
+            color: #88ccff;
+            margin: 1.2rem 0 0.8rem 0;
+        }
+
+        .textbook-paragraph {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .fun-fact {
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 3px solid #ffd700;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+            font-style: italic;
+        }
+
+        .fun-fact::before {
+            content: "✨ Fun Fact: ";
+            font-weight: bold;
+            color: #ffd700;
+            font-style: normal;
+        }
+
+        .key-term {
+            background: rgba(100, 100, 200, 0.2);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #aaddff;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        button {
+            background: linear-gradient(135deg, #4a2f8d, #2a1f5a);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: bold;
+        }
+
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #5a3f9d, #3a2f6a);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .quiz-start-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        .quiz-start-btn:hover {
+            background: linear-gradient(135deg, #ff8c8c, #ff7a4a);
+            transform: scale(1.05);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .switch-btn {
+            background: linear-gradient(135deg, #8b2f5a, #5a1f3a);
+        }
+
+        .switch-btn:hover {
+            background: linear-gradient(135deg, #9b3f6a, #6a2f4a);
+        }
+
+        .page-indicator {
+            text-align: center;
+            font-family: monospace;
+            color: #ffd700;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Quiz Mode Styles */
+        .quiz-question {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+
+        .quiz-option {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .quiz-option:hover {
+            background: rgba(255, 215, 0, 0.15);
+            border-color: #ffd700;
+        }
+
+        .quiz-option.selected {
+            background: rgba(255, 215, 0, 0.25);
+            border-color: #ffd700;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            margin-left: 1rem;
+            font-family: monospace;
+        }
+
+        .difficulty-beginner { background: #2e7d32; }
+        .difficulty-intermediate { background: #ed6c02; }
+        .difficulty-advanced { background: #d32f2f; }
+
+        .results {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .final-score {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            color: #ffd700;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            .textbook-content {
+                padding: 1.5rem;
+            }
+            .chapter-title {
+                font-size: 1.5rem;
+            }
+            .learning-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="stars" id="stars"></div>
+    <div class="floating-planets" id="floatingPlanets"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">🚀 Cosmic Explorer - Learning Hub</div>
+        <nav class="nav">
+            <a href="index.html">🏠 Home</a>
+            <a href="#" onclick="logout()">🚪 Logout</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="topics-section">
+            <div class="title-container">
+                <h2 class="section-title">📚 Cosmic Textbook</h2>
+            </div>
+            <div class="topics-grid" id="topicsGrid"></div>
+        </div>
+
+        <div class="learning-panel" id="learningPanel">
+            <div class="learning-header">
+                <div>
+                    <div class="current-topic" id="currentTopic">Select a Chapter</div>
+                    <div class="chapter-info" id="chapterInfo">Choose a topic from above to begin reading</div>
+                </div>
+                <div>
+                    <span class="mode-badge" id="modeBadge">📖 Reading Mode</span>
+                    <button id="toggleModeBtn" class="switch-btn" style="margin-left: 1rem;">🎯 Take Quiz</button>
+                </div>
+            </div>
+            <div class="textbook-content" id="contentArea">
+                <p style="text-align: center; padding: 3rem; color: #aaa;">✨ Select a chapter from the cosmic textbook above to begin your journey ✨</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchCurrentUser() {
+            try {
+                const response = await fetch('/api/user');
+                if (!response.ok) {
+                    return null;
+                }
+                const data = await response.json();
+                return data.user || null;
+            } catch (error) {
+                console.error('Unable to fetch current user:', error);
+                return null;
+            }
+        }
+
+      function ensureLoggedIn() {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+
+    if (!user) {
+        alert("Please login first ❌");
+        window.location.href = "loginsignup.html";
+        return false;
+    }
+
+    return true;
+}
+
+        // Complete Textbook Data with rich, paragraph-style content
+        const topicsData = {
+            planets: {
+                name: "\u{1FA90} Chapter 1: The Solar System",
+                subtitle: "Our Celestial Neighborhood",
+                description: "Explore the planets that orbit our Sun",
+                chapters: [
+                    // Beginner Level - Pages 1-10
+                    {
+                        level: "beginner",
+                        title: "The Inner Planets: Mercury & Venus",
+                        content: `<p class="textbook-paragraph">The <span class="key-term">Solar System</span> is a vast and fascinating place, with eight unique planets orbiting our star, the Sun. Among these, the four inner planets—Mercury, Venus, Earth, and Mars—are known as <span class="key-term">terrestrial planets</span> because they have solid, rocky surfaces.</p>
+                        <p class="textbook-paragraph"><strong>Mercury</strong>, the closest planet to the Sun, is a world of extreme temperatures. During the day, temperatures can soar to 430°C (800°F), but at night, they plummet to -180°C (-290°F). Despite its proximity to the Sun, Mercury has ice in permanently shadowed craters at its poles!</p>
+                        <p class="textbook-paragraph"><strong>Venus</strong>, often called Earth's "sister planet," is similar in size but dramatically different in conditions. Its atmosphere is 96% carbon dioxide, creating a runaway greenhouse effect that makes it the hottest planet—even hotter than Mercury—with surface temperatures reaching 470°C (880°F).</p>
+                        <div class="fun-fact">Venus rotates backwards compared to other planets, meaning the Sun rises in the west and sets in the east!</div>`
+                    },
+                    {
+                        level: "beginner",
+                        title: "Earth & Mars: The Life and The Red Planet",
+                        content: `<p class="textbook-paragraph"><strong>Earth</strong> is our home—the only planet known to support life. With its perfect distance from the Sun (the <span class="key-term">Goldilocks Zone</span>), liquid water covers 71% of its surface. Earth's atmosphere protects us from harmful radiation and provides the oxygen we breathe.</p>
+                        <p class="textbook-paragraph"><strong>Mars</strong>, the Red Planet, gets its color from <span class="key-term">iron oxide</span>—essentially rust—on its surface. Mars has the tallest volcano in the solar system, Olympus Mons, which is three times the height of Mount Everest! Scientists continue searching for evidence of past microbial life on Mars.</p>
+                        <div class="fun-fact">A day on Mars is just 37 minutes longer than a day on Earth, making it very similar to our own planetary rhythm!</div>`
+                    },
+                    {
+                        level: "beginner",
+                        title: "The Gas Giants: Jupiter & Saturn",
+                        content: `<p class="textbook-paragraph">Beyond the asteroid belt lie the <span class="key-term">gas giants</span>—Jupiter and Saturn. These massive planets have no solid surface; instead, they're composed primarily of hydrogen and helium, similar to the Sun itself.</p>
+                        <p class="textbook-paragraph"><strong>Jupiter</strong> is the largest planet in our solar system—so large that you could fit all other planets inside it! Its most famous feature is the <span class="key-term">Great Red Spot</span>, a giant storm that has been raging for at least 400 years. This storm is larger than Earth itself!</p>
+                        <p class="textbook-paragraph"><strong>Saturn</strong> is famous for its stunning ring system. These rings are made of billions of ice and rock particles, ranging from tiny grains to house-sized chunks. Saturn is so light that if you could find a bathtub large enough, it would float!</p>
+                        <div class="fun-fact">Saturn's density is less than water—0.687 g/cm³ compared to water's 1 g/cm³!</div>`
+                    },
+                    {
+                        level: "beginner",
+                        title: "The Ice Giants: Uranus & Neptune",
+                        content: `<p class="textbook-paragraph">The outer planets—Uranus and Neptune—are called <span class="key-term">ice giants</span> because they contain more "ices" like water, ammonia, and methane compared to Jupiter and Saturn.</p>
+                        <p class="textbook-paragraph"><strong>Uranus</strong> is unique because it rotates on its side! Scientists believe a massive collision long ago knocked it over. This gives Uranus extreme seasons—each pole gets 42 years of continuous sunlight followed by 42 years of darkness.</p>
+                        <p class="textbook-paragraph"><strong>Neptune</strong> has the strongest winds in the solar system, reaching speeds of 2,100 km/h (1,300 mph)—faster than the speed of sound! Despite being farthest from the Sun, Neptune generates internal heat that drives these incredible storms.</p>
+                        <div class="fun-fact">Neptune was discovered through mathematical predictions before it was ever seen through a telescope!</div>`
+                    },
+                    // Intermediate Level - Pages 11-20
+                    {
+                        level: "intermediate",
+                        title: "Jupiter's Great Red Spot & Galilean Moons",
+                        content: `<p class="textbook-paragraph">The <span class="key-term">Great Red Spot</span> is not just a storm—it's a complex atmospheric system that has fascinated astronomers for centuries. Recent observations from the Juno spacecraft have revealed that this storm extends hundreds of kilometers into Jupiter's atmosphere.</p>
+                        <p class="textbook-paragraph">Jupiter's four largest moons—Io, Europa, Ganymede, and Callisto—were discovered by Galileo Galilei in 1610. <span class="key-term">Ganymede</span> is the largest moon in the solar system, even bigger than Mercury! <span class="key-term">Europa</span> has a subsurface ocean containing more water than all of Earth's oceans combined, making it a prime candidate in the search for extraterrestrial life.</p>
+                        <p class="textbook-paragraph"><span class="key-term">Io</span> is the most volcanically active body in the solar system, with hundreds of volcanoes erupting constantly due to tidal heating from Jupiter's immense gravity.</p>
+                        <div class="fun-fact">Jupiter's magnetic field is 20,000 times stronger than Earth's, creating spectacular auroras at its poles!</div>`
+                    },
+                    {
+                        level: "intermediate",
+                        title: "Saturn's Rings and Titan's Mysteries",
+                        content: `<p class="textbook-paragraph">Saturn's rings are not solid—they're composed of countless individual particles, mostly water ice with some rocky material. These rings are incredibly thin, only about 10 meters thick in most places, yet they span up to 282,000 kilometers in diameter.</p>
+                        <p class="textbook-paragraph"><span class="key-term">Titan</span>, Saturn's largest moon, is one of the most Earth-like worlds in the solar system. It has a thick nitrogen atmosphere (even denser than Earth's) and features lakes, rivers, and seas—but filled with liquid methane and ethane instead of water. The Cassini-Huygens mission landed a probe on Titan's surface in 2005, revealing a fascinating world of hydrocarbon dunes and cryovolcanoes.</p>
+                        <div class="fun-fact">If Saturn were placed in a giant bathtub, it would float because its average density is less than water!</div>`
+                    },
+                    {
+                        level: "intermediate",
+                        title: "Uranus: The Sideways Planet",
+                        content: `<p class="textbook-paragraph">Uranus has an axial tilt of 98 degrees, meaning it essentially rolls around the Sun on its side. This extreme tilt creates bizarre seasons: for nearly a quarter of its 84-year orbit, one pole faces the Sun directly while the other faces away in complete darkness.</p>
+                        <p class="textbook-paragraph">Uranus appears pale blue-green due to <span class="key-term">methane</span> in its atmosphere, which absorbs red light and reflects blue. The planet has a faint ring system and 27 known moons, most named after characters from Shakespeare and Alexander Pope.</p>
+                        <div class="fun-fact">Uranus was the first planet discovered with a telescope (by William Herschel in 1781) and was originally named "George's Star" after King George III!</div>`
+                    },
+                    {
+                        level: "intermediate",
+                        title: "Neptune: The Windy Blue Giant",
+                        content: `<p class="textbook-paragraph">Neptune generates more heat than it receives from the Sun, creating the most dynamic weather in the solar system. Its Great Dark Spot, a storm system similar to Jupiter's, appeared in Voyager 2 images in 1989 but had disappeared by the time Hubble observed it in 1994—only to reappear later!</p>
+                        <p class="textbook-paragraph"><span class="key-term">Triton</span>, Neptune's largest moon, orbits backwards (retrograde orbit) relative to Neptune's rotation, suggesting it was captured from the Kuiper Belt. Triton has geysers of liquid nitrogen that erupt from its surface, making it one of the few geologically active moons in the outer solar system.</p>
+                        <div class="fun-fact">Neptune's winds are the fastest in the solar system, reaching speeds of 2,100 km/h—faster than the speed of sound on Earth!</div>`
+                    },
+                    // Advanced Level - Pages 21-30
+                    {
+                        level: "advanced",
+                        title: "Exoplanets & Planetary Formation Theories",
+                        content: `<p class="textbook-paragraph">The study of <span class="key-term">exoplanets</span>—planets orbiting other stars—has revolutionized our understanding of planetary systems. The <span class="key-term">Nebular Hypothesis</span> proposes that planets form from the same protoplanetary disk of gas and dust that forms their parent star.</p>
+                        <p class="textbook-paragraph">Recent discoveries have revealed <span class="key-term">Hot Jupiters</span>—gas giants orbiting extremely close to their stars—challenging traditional formation models. The <span class="key-term">Grand Tack Hypothesis</span> suggests Jupiter migrated inward then outward early in solar system history, explaining the small size of Mars and the asteroid belt's composition.</p>
+                        <div class="fun-fact">Over 5,000 exoplanets have been confirmed as of 2024, with thousands more candidates awaiting confirmation!</div>`
+                    },
+                    {
+                        level: "advanced",
+                        title: "Planetary Atmospheres & Climate Dynamics",
+                        content: `<p class="textbook-paragraph">Understanding <span class="key-term">planetary atmospheres</span> requires studying complex interactions between radiation, chemistry, and dynamics. Venus's <span class="key-term">runaway greenhouse effect</span> serves as a cautionary tale for climate science, while Mars's thin atmosphere (only 1% of Earth's pressure) allows extreme temperature variations.</p>
+                        <p class="textbook-paragraph">The gas giants exhibit <span class="key-term">banded atmospheric circulation</span> driven by rapid rotation and internal heat. Jupiter's zones (light bands) and belts (dark bands) represent rising and descending gas, creating the striking patterns visible through even small telescopes.</p>
+                        <div class="fun-fact">Jupiter's Great Red Spot is shrinking—in the 1800s, it could fit three Earths across, but now it fits only one!</div>`
+                    }
+                ],
+                quiz: []
+            },
+            stars: {
+                name: "⭐ Chapter 2: Stars & Constellations",
+                subtitle: "The Beacons of the Night Sky",
+                description: "Learn about stellar evolution and star patterns",
+                chapters: [
+                    {
+                        level: "beginner",
+                        title: "What Are Stars?",
+                        content: `<p class="textbook-paragraph">Stars are massive, luminous spheres of plasma held together by their own gravity. Our Sun is the closest star to Earth, just 150 million kilometers away—but other stars are so distant that we measure their distances in <span class="key-term">light-years</span>, the distance light travels in one year (about 9.46 trillion kilometers).</p>
+                        <p class="textbook-paragraph">Stars appear to twinkle because their light passes through Earth's turbulent atmosphere, which bends the light slightly. In space, stars don't twinkle at all!</p>
+                        <div class="fun-fact">The closest star to our Sun is Proxima Centauri, located about 4.24 light-years away!</div>`
+                    },
+                    {
+                        level: "beginner",
+                        title: "Constellations: Star Patterns in the Sky",
+                        content: `<p class="textbook-paragraph"><span class="key-term">Constellations</span> are patterns of stars that ancient civilizations imagined as figures—heroes, animals, and mythical creatures. The International Astronomical Union officially recognizes 88 constellations covering the entire celestial sphere.</p>
+                        <p class="textbook-paragraph"><strong>Orion</strong> (the Hunter) is one of the most recognizable constellations, featuring Betelgeuse (a red supergiant) and Rigel (a blue supergiant). The three stars of Orion's belt point toward Sirius, the brightest star in Earth's night sky.</p>
+                        <div class="fun-fact">The Big Dipper is not a constellation itself—it's an asterism (a recognizable star pattern) within the constellation Ursa Major (the Great Bear)!</div>`
+                    },
+                    {
+                        level: "beginner",
+                        title: "Star Colors and Temperatures",
+                        content: `<p class="textbook-paragraph">Star colors reveal their temperatures. <span class="key-term">Red stars</span> are cooler (3,000-4,000 K), while <span class="key-term">blue stars</span> are hotter (20,000-30,000 K). Our yellow Sun has a surface temperature of about 5,500°C (10,000°F).</p>
+                        <p class="textbook-paragraph">The <span class="key-term">Hertzsprung-Russell diagram</span> (H-R diagram) plots stars by their luminosity and temperature, revealing patterns in stellar evolution. Most stars, including our Sun, lie on the <span class="key-term">main sequence</span> where they fuse hydrogen into helium.</p>
+                        <div class="fun-fact">Betelgeuse appears reddish-orange because its surface temperature is only about 3,500 K—much cooler than our Sun!</div>`
+                    },
+                    {
+                        level: "intermediate",
+                        title: "Stellar Life Cycles",
+                        content: `<p class="textbook-paragraph">Stars are born in <span class="key-term">nebulae</span>—vast clouds of gas and dust. Gravity causes regions within these clouds to collapse, forming protostars. When the core temperature reaches about 15 million K, nuclear fusion begins, and a star is born.</p>
+                        <p class="textbook-paragraph">Low-mass stars (like our Sun) eventually become <span class="key-term">red giants</span>, then shed their outer layers to form <span class="key-term">planetary nebulae</span>, leaving behind <span class="key-term">white dwarfs</span>. Massive stars explode as <span class="key-term">supernovae</span>, leaving behind neutron stars or black holes.</p>
+                        <div class="fun-fact">A teaspoon of neutron star material would weigh about 10 million tons on Earth!</div>`
+                    },
+                    {
+                        level: "intermediate",
+                        title: "Star Clusters and Nebulae",
+                        content: `<p class="textbook-paragraph"><span class="key-term">Open clusters</span> contain hundreds of young stars loosely bound by gravity, like the Pleiades (Seven Sisters). <span class="key-term">Globular clusters</span> contain hundreds of thousands of ancient stars tightly packed together, orbiting the galactic halo.</p>
+                        <p class="textbook-paragraph"><span class="key-term">Nebulae</span> come in several types: <span class="key-term">emission nebulae</span> glow red from ionized hydrogen, <span class="key-term">reflection nebulae</span> appear blue from scattered starlight, and <span class="key-term">dark nebulae</span> block background light.</p>
+                        <div class="fun-fact">The Orion Nebula is visible to the naked eye as a fuzzy "star" in Orion's sword, located about 1,344 light-years away!</div>`
+                    },
+                    {
+                        level: "advanced",
+                        title: "Supernovae, Neutron Stars, and Black Holes",
+                        content: `<p class="textbook-paragraph">When massive stars exhaust their nuclear fuel, their cores collapse catastrophically, triggering a <span class="key-term">supernova explosion</span> that can briefly outshine entire galaxies. The remaining core becomes either a <span class="key-term">neutron star</span> (if between 1.4 and 3 solar masses) or a <span class="key-term">black hole</span> (if above 3 solar masses).</p>
+                        <p class="textbook-paragraph"><span class="key-term">Pulsars</span> are rotating neutron stars that emit beams of radiation like cosmic lighthouses. <span class="key-term">Magnetars</span> have magnetic fields quadrillion times stronger than Earth's, capable of causing starquakes that release enormous energy.</p>
+                        <div class="fun-fact">The first black hole ever photographed (M87*) has a mass 6.5 billion times that of our Sun!</div>`
+                    }
+                ],
+                quiz: []
+            },
+            galaxies: {
+                name: "🌌 Chapter 3: Galaxies & The Universe",
+                subtitle: "Islands of Stars in the Cosmos",
+                description: "Discover galaxies, dark matter, and cosmic evolution",
+                chapters: [
+                    {
+                        level: "beginner",
+                        title: "The Milky Way: Our Galactic Home",
+                        content: `<p class="textbook-paragraph">The <span class="key-term">Milky Way</span> is a barred spiral galaxy containing an estimated 100-400 billion stars, including our Sun. From Earth, we see it as a faint, milky band of light stretching across the night sky—hence its name.</p>
+                        <p class="textbook-paragraph">Our solar system is located about 26,000 light-years from the galactic center, in one of the spiral arms called the Orion Arm (or Local Spur). It takes our Sun about 230 million years to complete one orbit around the galaxy—a <span class="key-term">galactic year</span>.</p>
+                        <div class="fun-fact">If you could travel at the speed of light, it would still take 100,000 years to cross from one side of the Milky Way to the other!</div>`
+                    },
+                    {
+                        level: "beginner",
+                        title: "Types of Galaxies",
+                        content: `<p class="textbook-paragraph">Galaxies come in three main shapes: <span class="key-term">spiral</span>, <span class="key-term">elliptical</span>, and <span class="key-term">irregular</span>. Spiral galaxies (like the Milky Way and Andromeda) have beautiful arms winding outward from a central bulge. Elliptical galaxies range from nearly spherical to football-shaped and contain mostly old, red stars.</p>
+                        <p class="textbook-paragraph"><span class="key-term">Irregular galaxies</span> have no defined shape, often resulting from gravitational interactions with other galaxies. The Large and Small Magellanic Clouds, visible from the southern hemisphere, are irregular dwarf galaxies orbiting the Milky Way.</p>
+                        <div class="fun-fact">The Andromeda Galaxy (M31) is the closest large galaxy to the Milky Way, located about 2.5 million light-years away!</div>`
+                    },
+                    {
+                        level: "intermediate",
+                        title: "Galactic Collisions and Mergers",
+                        content: `<p class="textbook-paragraph">Galaxies frequently interact, collide, and merge over cosmic timescales. The Milky Way and Andromeda are on a collision course—in about 4.5 billion years, they will merge to form a giant elliptical galaxy nicknamed "Milkomeda."</p>
+                        <p class="textbook-paragraph">During collisions, galaxies can create spectacular <span class="key-term">tidal tails</span>—streams of stars and gas stretching millions of light-years. The <span class="key-term">Antennae Galaxies</span> provide a stunning example of two galaxies in the early stages of merging, with intense star formation occurring in the collision zones.</p>
+                        <div class="fun-fact">Despite the dramatic appearance of galactic collisions, individual stars almost never collide—galaxies are mostly empty space!</div>`
+                    },
+                    {
+                        level: "intermediate",
+                        title: "Active Galaxies and Quasars",
+                        content: `<p class="textbook-paragraph">Some galaxies have extremely bright centers called <span class="key-term">Active Galactic Nuclei (AGN)</span>, powered by supermassive black holes consuming surrounding material. <span class="key-term">Quasars</span> are the most luminous AGN, visible across billions of light-years.</p>
+                        <p class="textbook-paragraph">A single quasar can outshine an entire galaxy of 100 billion stars, yet its energy comes from a region smaller than our solar system. The nearest quasar, 3C 273, is about 2.5 billion light-years away and shines with the power of trillions of Suns.</p>
+                        <div class="fun-fact">The word "quasar" is short for "quasi-stellar radio source" because they looked like stars when first discovered!</div>`
+                    },
+                    {
+                        level: "advanced",
+                        title: "Dark Matter and Dark Energy",
+                        content: `<p class="textbook-paragraph">The visible matter in galaxies (stars, gas, dust) accounts for only about 5% of the universe's total mass-energy. <span class="key-term">Dark matter</span> (about 27%) provides the gravitational glue holding galaxies and galaxy clusters together, but it doesn't interact with light, making it invisible.</p>
+                        <p class="textbook-paragraph"><span class="key-term">Dark energy</span> (about 68%) is even more mysterious—it appears to be causing the expansion of the universe to accelerate. The <span class="key-term">Lambda-CDM model</span> (Lambda Cold Dark Matter) is the standard cosmological model incorporating these components.</p>
+                        <div class="fun-fact">Scientists estimate that dark matter outweighs visible matter by about 6 to 1 in the universe!</div>`
+                    },
+                    {
+                        level: "advanced",
+                        title: "The Cosmic Web and Large-Scale Structure",
+                        content: `<p class="textbook-paragraph">On the largest scales, galaxies aren't randomly distributed—they form a <span class="key-term">cosmic web</span> of filaments, sheets, and voids. Galaxy clusters (containing hundreds or thousands of galaxies) sit at the intersections of filaments, connected by bridges of dark matter and hot gas.</p>
+                        <p class="textbook-paragraph">The <span class="key-term">Laniakea Supercluster</span> contains the Milky Way and about 100,000 other galaxies, spanning 500 million light-years. Beyond that lie even larger structures like the Hercules-Corona Borealis Great Wall, possibly the largest known structure in the universe.</p>
+                        <div class="fun-fact">The observable universe contains an estimated 2 trillion galaxies—more than the number of stars in the Milky Way!</div>`
+                    }
+                ],
+                quiz: []
+            }
+        };
+
+        // Generate quiz questions from chapter content
+        function generateQuizQuestions(topicKey) {
+            const chapters = topicsData[topicKey].chapters;
+            const questions = [];
+            let qIndex = 0;
+            
+            for (let i = 0; i < chapters.length && questions.length < 30; i++) {
+                const chapter = chapters[i];
+                const difficulty = chapter.level;
+                
+                // Extract sentences for questions (simplified for demo)
+                const sentences = chapter.content.match(/<p class="textbook-paragraph">(.*?)<\/p>/g) || [];
+                
+                for (let j = 0; j < Math.min(3, sentences.length) && questions.length < 30; j++) {
+                    const cleanText = sentences[j].replace(/<[^>]*>/g, '').substring(0, 150);
+                    if (cleanText.length > 20) {
+                        const correctAnswer = cleanText.split('.')[0] + ".";
+                        questions.push({
+                            id: qIndex++,
+                            text: `Based on the reading: ${cleanText.substring(0, 100)}... What key concept is being described?`,
+                            correctAnswer: correctAnswer.substring(0, 80),
+                            options: [
+                                correctAnswer.substring(0, 80),
+                                `A different astronomical concept`,
+                                `This is a common misconception`,
+                                `This applies to a different celestial object`
+                            ].sort(() => Math.random() - 0.5),
+                            difficulty: difficulty
+                        });
+                    }
+                }
+            }
+            
+            // Fill remaining questions if needed
+            while (questions.length < 30) {
+                questions.push({
+                    id: qIndex++,
+                    text: "What is the primary force that governs the motion of planets and stars?",
+                    correctAnswer: "Gravity",
+                    options: ["Gravity", "Magnetism", "Nuclear fusion", "Electromagnetism"],
+                    difficulty: questions.length < 10 ? "beginner" : (questions.length < 20 ? "intermediate" : "advanced")
+                });
+            }
+            
+            return questions.slice(0, 30);
+        }
+
+        // Initialize quiz data
+        for (let topic in topicsData) {
+            topicsData[topic].quiz = generateQuizQuestions(topic);
+        }
+
+        // App State
+        let currentTopic = null;
+        let currentMode = "learning";
+        let currentChapterIndex = 0;
+        let currentQuizIndex = 0;
+        let quizAnswers = [];
+        let quizStarted = false;
+        let quizResultSubmitted = false;
+
+        async function submitQuizResult(topic, score, total, completedSections) {
+            try {
+                await fetch('/api/quiz-result', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        topic,
+                        score,
+                        total,
+                        completedSections
+                    })
+                });
+                console.log('Quiz result saved');
+            } catch (error) {
+                console.warn('Unable to save quiz result:', error);
+            }
+        }
+
+        // DOM Elements
+        const topicsGrid = document.getElementById("topicsGrid");
+        const currentTopicSpan = document.getElementById("currentTopic");
+        const chapterInfoSpan = document.getElementById("chapterInfo");
+        const modeBadge = document.getElementById("modeBadge");
+        const toggleModeBtn = document.getElementById("toggleModeBtn");
+        const contentArea = document.getElementById("contentArea");
+
+        // Render Topics
+        function renderTopics() {
+            topicsGrid.innerHTML = "";
+            for (let [key, topic] of Object.entries(topicsData)) {
+                const card = document.createElement("div");
+                card.className = `topic-card ${currentTopic === key ? 'active' : ''}`;
+                card.innerHTML = `
+                    <div class="topic-icon">${topic.name.split(' ')[0]}</div>
+                    <div class="topic-name">${topic.name}</div>
+                    <div class="topic-desc">${topic.description}</div>
+                    <div class="chapter-badge">📖 ${topic.chapters.length} sections</div>
+                `;
+                card.onclick = () => selectTopic(key);
+                topicsGrid.appendChild(card);
+            }
+        }
+
+        function selectTopic(topicKey) {
+            currentTopic = topicKey;
+            currentChapterIndex = 0;
+            currentQuizIndex = 0;
+            quizAnswers = [];
+            quizStarted = false;
+            renderTopics();
+            updateLearningPanel();
+        }
+
+        function updateLearningPanel() {
+            if (!currentTopic) return;
+            
+            const topic = topicsData[currentTopic];
+            currentTopicSpan.textContent = topic.name;
+            
+            if (currentMode === "learning") {
+                modeBadge.textContent = "📖 Reading Mode";
+                toggleModeBtn.textContent = "🎯 Take Quiz";
+                renderLearningMode();
+            } else {
+                modeBadge.textContent = "📝 Quiz Mode";
+                toggleModeBtn.textContent = "📖 Return to Reading";
+                renderQuizMode();
+            }
+        }
+
+        function getDifficultyLabel(level) {
+            if (level === 'beginner') return '🌱 Beginner';
+            if (level === 'intermediate') return '📘 Intermediate';
+            return '🎓 Advanced';
+        }
+
+        function renderLearningMode() {
+            const topic = topicsData[currentTopic];
+            const chapter = topic.chapters[currentChapterIndex];
+            const totalChapters = topic.chapters.length;
+            
+            let prevLevel = currentChapterIndex > 0 ? topic.chapters[currentChapterIndex - 1].level : null;
+            let nextLevel = currentChapterIndex < totalChapters - 1 ? topic.chapters[currentChapterIndex + 1].level : null;
+            
+            contentArea.innerHTML = `
+                <div class="chapter-title">${chapter.title}</div>
+                <div style="margin-bottom: 1rem;">
+                    <span class="difficulty-badge ${chapter.level === 'beginner' ? 'difficulty-beginner' : (chapter.level === 'intermediate' ? 'difficulty-intermediate' : 'difficulty-advanced')}">
+                        ${getDifficultyLabel(chapter.level)}
+                    </span>
+                    <span style="margin-left: 1rem; color: #aaa;">Section ${currentChapterIndex + 1} of ${totalChapters}</span>
+                </div>
+                ${chapter.content}
+                <div class="nav-buttons">
+                    <button ${currentChapterIndex === 0 ? 'disabled' : ''} id="prevChapterBtn">◀ Previous Section</button>
+                    <button id="nextChapterBtn" class="${currentChapterIndex === totalChapters - 1 ? 'quiz-start-btn' : ''}">${currentChapterIndex === totalChapters - 1 ? '🎯 Start Quiz' : 'Next Section ▶'}</button>
+                </div>
+                <div class="page-indicator">
+                    ━━━  ${Math.floor(((currentChapterIndex + 1) / totalChapters) * 100)}% Complete  ━━━
+                </div>
+            `;
+            
+            document.getElementById("prevChapterBtn")?.addEventListener("click", () => {
+                if (currentChapterIndex > 0) {
+                    currentChapterIndex--;
+                    renderLearningMode();
+                }
+            });
+            
+            document.getElementById("nextChapterBtn")?.addEventListener("click", () => {
+                if (currentChapterIndex < totalChapters - 1) {
+                    currentChapterIndex++;
+                    renderLearningMode();
+                } else {
+                    // Completed reading, switch to quiz mode
+                    isQuizMode = true;
+                    renderQuizMode();
+                }
+            });
+        }
+
+        function renderQuizMode() {
+            const topic = topicsData[currentTopic];
+            const quiz = topic.quiz;
+            
+            if (!quizStarted) {
+                contentArea.innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <h2>📝 Chapter Quiz</h2>
+                        <p style="margin: 1rem 0;">Test your knowledge of ${topic.name}</p>
+                        <p style="margin: 0.5rem 0;">🔹 30 Questions</p>
+                        <p style="margin: 0.5rem 0;">🔹 Beginner: Questions 1-10</p>
+                        <p style="margin: 0.5rem 0;">🔹 Intermediate: Questions 11-20</p>
+                        <p style="margin: 0.5rem 0;">🔹 Advanced: Questions 21-30</p>
+                        <p style="margin: 1.5rem 0;">✨ Need 70% to earn your Cosmic Certificate! ✨</p>
+                        <button id="startQuizBtn" style="font-size: 1.2rem; padding: 1rem 2rem;">🚀 Begin Quiz 🚀</button>
+                    </div>
+                `;
+                document.getElementById("startQuizBtn")?.addEventListener("click", () => {
+                    quizStarted = true;
+                    currentQuizIndex = 0;
+                    quizAnswers = new Array(30).fill(null);
+                    renderQuizMode();
+                });
+                return;
+            }
+            
+            if (currentQuizIndex >= quiz.length) {
+                const score = quizAnswers.filter((ans, idx) => ans === quiz[idx].correctAnswer).length;
+                const percentage = (score / quiz.length) * 100;
+                let grade = percentage >= 90 ? "🌟 Cosmic Master Astronomer!" : percentage >= 70 ? "🚀 Certified Space Explorer!" : "📚 Keep Studying, Young Padawan!";
+                let certificate = percentage >= 70 ? "🏆 CERTIFICATE OF ACHIEVEMENT 🏆" : "📖 Review the material and try again!";
+                
+                contentArea.innerHTML = `
+                    <div class="results">
+                        <h2>Quiz Complete!</h2>
+                        <div class="final-score">${score} / 30</div>
+                        <div style="font-size: 1.3rem;">${percentage}% - ${grade}</div>
+                        <div style="margin: 1rem 0; padding: 1rem; background: rgba(255,215,0,0.1); border-radius: 10px;">${certificate}</div>
+                        <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                            <button id="retakeQuizBtn">🔄 Retake Quiz</button>
+                            <button id="backToReadingBtn" class="switch-btn">📖 Back to Reading</button>
+                        </div>
+                    </div>
+                `;
+
+                if (!quizResultSubmitted) {
+                    submitQuizResult(currentTopic || 'unknown', score, quiz.length, currentChapterIndex + 1);
+                    quizResultSubmitted = true;
+                }
+                
+                document.getElementById("retakeQuizBtn")?.addEventListener("click", () => {
+                    quizStarted = false;
+                    currentQuizIndex = 0;
+                    quizAnswers = [];
+                    renderQuizMode();
+                });
+                
+                document.getElementById("backToReadingBtn")?.addEventListener("click", () => {
+                    currentMode = "learning";
+                    updateLearningPanel();
+                });
+                return;
+            }
+            
+            const currentQ = quiz[currentQuizIndex];
+            const selectedAnswer = quizAnswers[currentQuizIndex];
+            let difficultyClass = currentQ.difficulty === "beginner" ? "difficulty-beginner" : (currentQ.difficulty === "intermediate" ? "difficulty-intermediate" : "difficulty-advanced");
+            let difficultyLabel = getDifficultyLabel(currentQ.difficulty);
+            
+            contentArea.innerHTML = `
+                <div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <span class="difficulty-badge ${difficultyClass}">${difficultyLabel}</span>
+                        <span style="margin-left: 1rem; color: #aaa;">Question ${currentQuizIndex + 1} of 30</span>
+                    </div>
+                    <div class="quiz-question">${currentQ.text}</div>
+                    <div class="quiz-options" id="quizOptions"></div>
+                    <div class="nav-buttons">
+                        <button ${currentQuizIndex === 0 ? 'disabled' : ''} id="prevQuizBtn">◀ Previous</button>
+                        <button id="nextQuizBtn">${currentQuizIndex === 29 ? '🏁 Finish Quiz' : 'Next ▶'}</button>
+                    </div>
+                </div>
+            `;
+            
+            const optionsContainer = document.getElementById("quizOptions");
+            currentQ.options.forEach(option => {
+                const optionDiv = document.createElement("div");
+                optionDiv.className = `quiz-option ${selectedAnswer === option ? 'selected' : ''}`;
+                optionDiv.textContent = option;
+                optionDiv.onclick = () => {
+                    quizAnswers[currentQuizIndex] = option;
+                    renderQuizMode();
+                };
+                optionsContainer.appendChild(optionDiv);
+            });
+            
+            document.getElementById("prevQuizBtn")?.addEventListener("click", () => {
+                if (currentQuizIndex > 0) {
+                    currentQuizIndex--;
+                    renderQuizMode();
+                }
+            });
+            
+            document.getElementById("nextQuizBtn")?.addEventListener("click", () => {
+                if (quizAnswers[currentQuizIndex] === null) {
+                    alert("Please select an answer before continuing!");
+                    return;
+                }
+                if (currentQuizIndex < quiz.length - 1) {
+                    currentQuizIndex++;
+                    renderQuizMode();
+                } else if (currentQuizIndex === quiz.length - 1) {
+                    if (quizAnswers.every(a => a !== null)) {
+                        currentQuizIndex++;
+                        renderQuizMode();
+                    } else {
+                        alert("Please answer all questions before finishing!");
+                    }
+                }
+            });
+        }
+
+        // Toggle mode
+        toggleModeBtn.addEventListener("click", () => {
+            if (!currentTopic) {
+                alert("Please select a chapter from the textbook first!");
+                return;
+            }
+            currentMode = currentMode === "learning" ? "quiz" : "learning";
+            if (currentMode === "quiz") {
+                quizStarted = false;
+                currentQuizIndex = 0;
+            }
+            updateLearningPanel();
+        });
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+
+        // Generate animated background
+        function generateStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 5 + 's';
+                star.style.animationDuration = Math.random() * 3 + 2 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        function generateFloatingPlanets() {
+            const planetsContainer = document.getElementById('floatingPlanets');
+            const planetEmojis = ['🪐', '🌍', '🌕', '☄️', '⭐'];
+            for (let i = 0; i < 10; i++) {
+                const planet = document.createElement('div');
+                planet.className = 'floating-planet';
+                planet.textContent = planetEmojis[Math.floor(Math.random() * planetEmojis.length)];
+                planet.style.fontSize = Math.random() * 30 + 20 + 'px';
+                planet.style.left = Math.random() * 100 + '%';
+                planet.style.animationDelay = Math.random() * 20 + 's';
+                planet.style.animationDuration = Math.random() * 10 + 20 + 's';
+                planetsContainer.appendChild(planet);
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            generateStars();
+            generateFloatingPlanets();
+            const loggedIn = await ensureLoggedIn();
+            if (loggedIn) {
+                renderTopics();
+            }
+        });
+
+        
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="footer-brand"><span class="brand-icon">🚀</span> Cosmic Explorer</h4>
+                    <p class="footer-text">Embark on an extraordinary journey through the cosmos with cutting-edge exploration and unparalleled discoveries.</p>
+                    <div class="social-links mt-4">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="footer-heading">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="galaxyType.html">Galaxy</a></li>
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="Learning .html">Learning</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-heading">Cosmic</h5>
+                    <ul class="footer-links">
+                        <li><a href="public/earth.html">Earth</a></li>
+                        <li><a href="public/mars.html">Mars</a></li>
+                        <li><a href="public/jupiter.html">Jupiter</a></li>
+                        <li><a href="public/saturn.html">Saturn</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <h5 class="footer-heading">Contact Info</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> hello@cosmicexplorer.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 sakshi Lane, NYC</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="copyright">&copy; 2025 Cosmic Explorer. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="footer-legal">Privacy Policy</a>
+                    <span class="mx-2">|</span>
+                    <a href="#" class="footer-legal">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

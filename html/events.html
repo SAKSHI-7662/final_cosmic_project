@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Cosmic Explorer</title>
+    <meta name="description" content="Explore cosmic events and space exploration missions with Cosmic Explorer.">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="spinner"></div>
+            <p class="loading-text">COSMIC EXPLORER</p>
+        </div>
+    </div>
+
+    <!-- Sticky Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container">
+            <!-- <a class="navbar-brand" href="index.html">
+                <span class="brand-icon">✦</span>COSMIC EXPLORER
+            </a> -->
+           
+             <div class="navbar-center">
+            <div class="nasa-logo" id="nasaLogo">🚀   COSMIC
+
+            </div>
+        </div>
+      <div class="col-lg-3 col-md-6">
+    <div class="category-card">...</div>
+</div>
+          <input type="text" id="searchBox" class="form-control w-25" placeholder="Search">
+          
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="galaxyType.html">Galaxy</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
+                </ul>
+                <a href="loginsignup.html" class="btn btn-primary ms-lg-3">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="page-title">Our Events</h1>
+                    <p class="page-subtitle">Exquisite experiences for every celebration</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Tabs -->
+    <section class="filter-section py-4">
+        <div class="container">
+            <div class="filter-tabs">
+                <button class="filter-btn active" data-filter="all">All Events</button>
+                <button class="filter-btn" data-filter="wedding">Weddings</button>
+                <button class="filter-btn" data-filter="birthday">Birthdays</button>
+                <button class="filter-btn" data-filter="engagement">Engagements</button>
+                <button class="filter-btn" data-filter="corporate">Corporate</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Grid -->
+    <section class="events-section py-5">
+        <div class="container">
+            <div class="row g-4" id="eventsGrid">
+                <!-- Wedding Events -->
+                <div class="col-lg-4 col-md-6 event-item" data-category="wedding">
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="/placeholder.svg?height=400&width=400" alt="Classic Wedding">
+                            <div class="event-badge">Wedding</div>
+                        </div>
+                        <div class="event-content">
+                            <h3>Classic Wedding</h3>
+                            <p>Timeless elegance with traditional ceremonies and sophisticated decor</p>
+                            <div class="event-details">
+                                <span><i class="fas fa-users"></i> Up to 200 guests</span>
+                                <span><i class="fas fa-clock"></i> Full day event</span>
+                            </div>
+                            <div class="event-price">Starting at $15,000</div>
+                            <a href="booking.html?event=classic-wedding" class="btn btn-primary w-100">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 event-item" data-category="wedding">
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="/placeholder.svg?height=400&width=400" alt="Destination Wedding">
+                            <div class="event-badge">Wedding</div>
+                        </div>
+                        <div class="event-content">
+                            <h3>Destination Wedding</h3>
+                            <p>Exotic locations with comprehensive planning and travel coordination</p>
+                            <div class="event-details">
+                                <span><i class="fas fa-users"></i> Up to 150 guests</span>
+                                <span><i class="fas fa-clock"></i> 2-3 days</span>
+                            </div>
+                            <div class="event-price">Starting at $25,000</div>
+                            <a href="booking.html?event=destination-wedding" class="btn btn-primary w-100">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 event-item" data-category="wedding">
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="/placeholder.svg?height=400&width=400" alt="Garden Wedding">
+                            <div class="event-badge">Wedding</div>
+                        </div>
+                        <div class="event-content">
+                            <h3>Garden Wedding</h3>
+                            <p>Intimate outdoor celebrations surrounded by natural beauty</p>
+                            <div class="event-details">
+                                <span><i class="fas fa-users"></i> Up to 100 guests</span>
+                                <span><i class="fas fa-clock"></i> Half day</span>
+                            </div>
+                            <div class="event-price">Starting at $12,000</div>
+                            <a href="booking.html?event=garden-wedding" class="btn btn-primary w-100">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Birthday Events -->
+                <div class="col-lg-4 col-md-6 event-item" data-category="birthday">
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="/placeholder.svg?height=400&width=400" alt="Milestone Birthday">
+                            <div class="event-badge">Birthday</div>
+                        </div>
+                        <div class="event-content">
+                            <h3>Milestone Birthday</h3>
+                            <p>Celebrate significant birthdays with style and sophistication</p>
+                            <div class="event-details">
+                                <span><i class="fas fa-users"></i> Up to 150 guests</span>
+                                <span><i class="fas fa-clock"></i> 4-6 hours</span>
+                            </div>
+                            <div class="event-price">Starting at $8,000</div>
+                            <a href="booking.html?event=milestone-birthday" class="btn btn-primary w-100">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 event-item" data-category="birthday">
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="/placeholder.svg?height=400&width=400" alt="Themed Party">
+                            <div class="event-badge">Birthday</div>
+                        </div>
+                        <div class="event-content">
+                            <h3>Themed Party</h3>
+                            <p>Creative custom themes brought to life with immersive experiences</p>
+                            <div class="event-details">
+                                <span><i class="fas fa-users"></i> Up to 100 guests</span>
+                                <span><i class="fas fa-clock"></i> 3-5 hours</span>
+                            </div>
+                            <div class="event-price">Starting at $6,000</div>
+                            <a href="booking.html?event=themed-party" class="btn btn-primary w-100">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 event-item" data-category="birthday">
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="/placeholder.svg?height=400&width=400" alt="Kids Birthday">
+                            <div class="event-badge">Birthday</div>
+                        </div>
+                        <div class="event-content">
+                            <h3>Kids Birthday Bash</h3>
+                            <p>Magical celebrations designed to delight young ones and families</p>
+                            <div class="event-details">
+                                <span><i class="fas fa-users"></i> Up to 50 guests</span>
+                                <span><i class="fas fa-clock"></i> 3-4 hours</span>
+                            </div>
+                            <div class="event-price">Starting at $3,500</div>
+                            <a href="booking.html?event=kids-birthday" class="btn btn-primary w-100">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Engagement Events -->
+                <div class="col-lg-4 col-md-6 event-item" data-category="engagement">
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="/placeholder.svg?height=400&width=400" alt="Romantic Engagement">
+                            <div class="event-badge">Engagement</div>
+                        </div>
+                        <div class="event-content">
+                            <h3>Romantic Proposal</h3>
+                            <p>Intimate proposal setups that create unforgettable moments</p>
+                            <div class="event-details">
+                                <span><i class="fas fa-users"></i> Private or small group</span>
+                                <span><i class="fas fa-clock"></i> 2-3 hours</span>
+                            </div>
+                            <div class="event-price">Starting at $2,500</div>
+                            <a href="booking.html?event=romantic-proposal" class="btn btn-primary w-100">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 event-item" data-category="engagement">
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="/placeholder.svg?height=400&width=400" alt="Engagement Party">
+                            <div class="event-badge">Engagement</div>
+                        </div>
+                        <div class="event-content">
+                            <h3>Engagement Party</h3>
+                            <p>Celebrate your commitment with friends and family in style</p>
+                            <div class="event-details">
+                                <span><i class="fas fa-users"></i> Up to 80 guests</span>
+                                <span><i class="fas fa-clock"></i> 3-4 hours</span>
+                            </div>
+                            <div class="event-price">Starting at $5,000</div>
+                            <a href="booking.html?event=engagement-party" class="btn btn-primary w-100">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Corporate Events -->
+                <div class="col-lg-4 col-md-6 event-item" data-category="corporate">
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="/placeholder.svg?height=400&width=400" alt="Corporate Gala">
+                            <div class="event-badge">Corporate</div>
+                        </div>
+                        <div class="event-content">
+                            <h3>Corporate Gala</h3>
+                            <p>Premium corporate events that elevate your brand image</p>
+                            <div class="event-details">
+                                <span><i class="fas fa-users"></i> Up to 500 guests</span>
+                                <span><i class="fas fa-clock"></i> Full evening</span>
+                            </div>
+                            <div class="event-price">Starting at $20,000</div>
+                            <a href="booking.html?event=corporate-gala" class="btn btn-primary w-100">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 event-item" data-category="corporate">
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="/placeholder.svg?height=400&width=400" alt="Product Launch">
+                            <div class="event-badge">Corporate</div>
+                        </div>
+                        <div class="event-content">
+                            <h3>Product Launch</h3>
+                            <p>Dynamic launch events that generate buzz and excitement</p>
+                            <div class="event-details">
+                                <span><i class="fas fa-users"></i> Up to 300 guests</span>
+                                <span><i class="fas fa-clock"></i> 2-4 hours</span>
+                            </div>
+                            <div class="event-price">Starting at $15,000</div>
+                            <a href="booking.html?event=product-launch" class="btn btn-primary w-100">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 event-item" data-category="corporate">
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="/placeholder.svg?height=400&width=400" alt="Team Building">
+                            <div class="event-badge">Corporate</div>
+                        </div>
+                        <div class="event-content">
+                            <h3>Team Building</h3>
+                            <p>Engaging activities that strengthen team bonds and morale</p>
+                            <div class="event-details">
+                                <span><i class="fas fa-users"></i> 20-200 guests</span>
+                                <span><i class="fas fa-clock"></i> Half or full day</span>
+                            </div>
+                            <div class="event-price">Starting at $5,000</div>
+                            <a href="booking.html?event=team-building" class="btn btn-primary w-100">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h2 class="cta-title">Don't see what you're looking for?</h2>
+                    <p class="cta-text">We create custom events tailored to your unique vision and requirements</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a href="booking.html" class="btn btn-light btn-lg">Custom Event Inquiry</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="footer-brand"><span class="brand-icon">🚀</span> Cosmic Explorer</h4>
+                    <p class="footer-text">Embark on an extraordinary journey through the cosmos with cutting-edge exploration and unparalleled discoveries.</p>
+                    <div class="social-links mt-4">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="footer-heading">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="galaxyType.html">Galaxy</a></li>
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="Learning .html">Learning</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-heading">Cosmic</h5>
+                    <ul class="footer-links">
+                        <li><a href="public/earth.html">Earth</a></li>
+                        <li><a href="public/mars.html">Mars</a></li>
+                        <li><a href="public/jupiter.html">Jupiter</a></li>
+                        <li><a href="public/saturn.html">Saturn</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <h5 class="footer-heading">Contact Info</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> hello@cosmicexplorer.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 sakshi Lane, NYC</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="copyright">&copy; 2025 Cosmic Explorer. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="footer-legal">Privacy Policy</a>
+                    <span class="mx-2">|</span>
+                    <a href="#" class="footer-legal">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    <script src="js/events.js"></script>
+</body>
+</html>
