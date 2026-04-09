@@ -643,8 +643,244 @@ a {
 }
 
 /* ===========================
-   Footer
+   Learning Section
    =========================== */
+.learning-section {
+  background: rgb(23, 23, 77);
+  position: relative;
+  overflow: hidden;
+}
+
+.learning-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(64, 6, 189, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(64, 6, 189, 0.03) 0%, transparent 50%);
+  animation: float-bg 20s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes float-bg {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -30px); }
+}
+
+.learning-section * {
+  position: relative;
+  z-index: 1;
+}
+
+.learning-card {
+  background: rgb(223, 220, 200);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  box-shadow: 0 5px 20px rgba(64, 6, 189, 0.08);
+  height: 100%;
+}
+
+.learning-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--color-accent);
+  box-shadow: 0 15px 40px rgba(64, 6, 189, 0.15);
+}
+
+.learning-card-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+  animation: bounce-icon 2s ease-in-out infinite;
+}
+
+.learning-card:nth-child(1) .learning-card-icon {
+  animation-delay: 0s;
+}
+
+.learning-card:nth-child(2) .learning-card-icon {
+  animation-delay: 0.2s;
+}
+
+.learning-card:nth-child(3) .learning-card-icon {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce-icon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.learning-card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--color-dark);
+}
+
+.learning-card-text {
+  color: #161212;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.learning-card-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--color-accent) 0%, #22016b 100%);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.learning-feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.feature-item {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.feature-item i {
+  color: var(--color-accent);
+  font-size: 1.5rem;
+  margin-top: 0.25rem;
+  flex-shrink: 0;
+}
+
+.feature-item p {
+  color: white;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.feature-item strong {
+  color: wheat;
+}
+
+.learning-illustration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+
+.cosmic-knowledge-badge {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-accent) 0%, #22016b 100%);
+  border-radius: 50%;
+  box-shadow: 0 10px 40px rgba(64, 6, 189, 0.3);
+  animation: pulse-badge 3s ease-in-out infinite;
+}
+
+@keyframes pulse-badge {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 10px 40px rgba(64, 6, 189, 0.3);
+  }
+  50% { 
+    transform: scale(1.05);
+    box-shadow: 0 15px 50px rgba(64, 6, 189, 0.5);
+  }
+}
+
+.badge-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badge-animation {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  animation: rotate-ring 4s linear infinite;
+}
+
+@keyframes rotate-ring {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.learning-cta {
+  background: linear-gradient(135deg, var(--color-accent) 0%, #22016b 100%) !important;
+  border: none !important;
+  color: white !important;
+  padding: 1rem 2.5rem !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+  border-radius: 50px !important;
+  box-shadow: 0 10px 25px rgba(64, 6, 189, 0.3);
+  transition: all 0.3s ease !important;
+}
+
+.learning-cta:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 15px 40px rgba(64, 6, 189, 0.5) !important;
+  color: white !important;
+}
+
+.learning-cta i {
+  margin-right: 0.5rem;
+}
+
+.learning-cta-subtext {
+  color: var(--color-text);
+  font-size: 0.95rem;
+  margin-top: 1.5rem;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .learning-card {
+    padding: 1.5rem;
+  }
+
+  .learning-card-icon {
+    font-size: 2.5rem;
+  }
+
+  .cosmic-knowledge-badge {
+    width: 150px;
+    height: 150px;
+  }
+
+  .badge-text {
+    font-size: 1.1rem;
+  }
+
+  .learning-cta {
+    width: 100%;
+  }
+}
+
+ /* ===========================
+   Footer
+   ============================  */
 .footer {
   background: var(--color-dark);
   color: var(--color-light);
